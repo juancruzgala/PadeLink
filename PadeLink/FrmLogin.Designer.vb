@@ -40,7 +40,7 @@ Partial Class Frmlogin
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Bahnschrift SemiBold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label1.Location = New System.Drawing.Point(375, 103)
+        Me.Label1.Location = New System.Drawing.Point(424, 103)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(158, 29)
         Me.Label1.TabIndex = 2
@@ -48,7 +48,7 @@ Partial Class Frmlogin
         '
         'txtContrasena
         '
-        Me.txtContrasena.Location = New System.Drawing.Point(456, 443)
+        Me.txtContrasena.Location = New System.Drawing.Point(505, 443)
         Me.txtContrasena.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtContrasena.Name = "txtContrasena"
         Me.txtContrasena.Size = New System.Drawing.Size(152, 26)
@@ -56,7 +56,7 @@ Partial Class Frmlogin
         '
         'txtUsuario
         '
-        Me.txtUsuario.Location = New System.Drawing.Point(456, 391)
+        Me.txtUsuario.Location = New System.Drawing.Point(505, 391)
         Me.txtUsuario.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtUsuario.Name = "txtUsuario"
         Me.txtUsuario.Size = New System.Drawing.Size(152, 26)
@@ -71,7 +71,7 @@ Partial Class Frmlogin
         Me.btnLogin.Location = New System.Drawing.Point(381, 499)
         Me.btnLogin.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(165, 34)
+        Me.btnLogin.Size = New System.Drawing.Size(243, 40)
         Me.btnLogin.TabIndex = 5
         Me.btnLogin.Text = "Ingresar"
         Me.btnLogin.UseVisualStyleBackColor = True
@@ -80,7 +80,7 @@ Partial Class Frmlogin
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(317, 391)
+        Me.Label2.Location = New System.Drawing.Point(366, 391)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(102, 26)
         Me.Label2.TabIndex = 6
@@ -90,7 +90,7 @@ Partial Class Frmlogin
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(317, 441)
+        Me.Label3.Location = New System.Drawing.Point(366, 441)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(143, 26)
         Me.Label3.TabIndex = 7
@@ -100,7 +100,7 @@ Partial Class Frmlogin
         '
         Me.lblTitulo.AutoSize = True
         Me.lblTitulo.Font = New System.Drawing.Font("Bahnschrift", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitulo.Location = New System.Drawing.Point(308, 37)
+        Me.lblTitulo.Location = New System.Drawing.Point(364, 35)
         Me.lblTitulo.Name = "lblTitulo"
         Me.lblTitulo.Size = New System.Drawing.Size(293, 43)
         Me.lblTitulo.TabIndex = 9
@@ -124,7 +124,7 @@ Partial Class Frmlogin
         Me.pbLogin.ErrorImage = Global.PadeLink.My.Resources.Resources.icono_login
         Me.pbLogin.Image = Global.PadeLink.My.Resources.Resources.icono_login
         Me.pbLogin.InitialImage = Global.PadeLink.My.Resources.Resources.icono_login
-        Me.pbLogin.Location = New System.Drawing.Point(337, 140)
+        Me.pbLogin.Location = New System.Drawing.Point(386, 140)
         Me.pbLogin.Name = "pbLogin"
         Me.pbLogin.Size = New System.Drawing.Size(231, 233)
         Me.pbLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -136,7 +136,7 @@ Partial Class Frmlogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.ClientSize = New System.Drawing.Size(900, 562)
+        Me.ClientSize = New System.Drawing.Size(978, 568)
         Me.Controls.Add(Me.btnAyuda)
         Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.pbLogin)
@@ -148,6 +148,7 @@ Partial Class Frmlogin
         Me.Controls.Add(Me.Label1)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "Frmlogin"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Inicio de Sesion"
         CType(Me.pbLogin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

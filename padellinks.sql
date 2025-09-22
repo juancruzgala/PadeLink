@@ -81,6 +81,7 @@ CREATE TABLE Inscripcion
   CONSTRAINT FK_Inscripcion_Parejas FOREIGN KEY (id_pareja) REFERENCES Parejas(id_pareja),
   CONSTRAINT FK_Inscripcion_Torneos FOREIGN KEY (id_torneo) REFERENCES Torneos(id_torneo)
 );
+
 insert into Usuarios(nombre_usuario,contraseña,estado) values ('Pablo', 1234, 'A')
 insert into Usuarios(nombre_usuario,contraseña,estado) values ('Roberto', 1234, 'A')
 insert into Usuarios(nombre_usuario,contraseña,estado) values ('Roxana', 1234, 'A')

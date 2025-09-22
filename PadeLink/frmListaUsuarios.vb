@@ -7,7 +7,6 @@ Public Class frmListaUsuarios
         dgvUsuarios.AutoGenerateColumns = True
         CargarUsuarios()
 
-        'Agregar columnas de botones si no existen
         If dgvUsuarios.Columns.Contains("colBloquear") = False Then
             Dim btnCol As New DataGridViewButtonColumn()
             btnCol.Name = "colBloquear"
@@ -26,16 +25,14 @@ Public Class frmListaUsuarios
             dgvUsuarios.Columns.Add(btnEdit)
         End If
 
-        'Ajustar ancho automático para que se vean las columnas
         dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
 
     End Sub
 
     Private Sub CargarUsuarios()
-        Using cn As New SqlConnection("Server=BESTIAGALARZA;Database=PadeLink;Trusted_Connection=True;")
+        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
             cn.Open()
 
-            'Consulta con alias claros
             Dim sql As String =
             "SELECT 
                 u.id_usuario AS IdUsuario,
@@ -54,7 +51,6 @@ Public Class frmListaUsuarios
             dgvUsuarios.DataSource = dt
         End Using
 
-        'Opcional: ocultar la columna de contraseña en la grilla
         If dgvUsuarios.Columns.Contains("Contrasena") Then
             dgvUsuarios.Columns("Contrasena").Visible = False
         End If
@@ -63,7 +59,7 @@ Public Class frmListaUsuarios
     Private Sub dgvUsuarios_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUsuarios.CellContentClick
         If e.RowIndex >= 0 Then
 
-            'Leer valores con los alias del SELECT
+
             Dim id As Integer = CInt(dgvUsuarios.Rows(e.RowIndex).Cells("IdUsuario").Value)
 
             Select Case dgvUsuarios.Columns(e.ColumnIndex).Name
@@ -82,7 +78,7 @@ Public Class frmListaUsuarios
     End Sub
 
     Private Sub BloquearUsuario(idUsuario As Integer)
-        Using cn As New SqlConnection("Server=BESTIAGALARZA;Database=PadeLink;Trusted_Connection=True;")
+        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
             cn.Open()
             Dim cmd As New SqlCommand("
             UPDATE Usuarios 

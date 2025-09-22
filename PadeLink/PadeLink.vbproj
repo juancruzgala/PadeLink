@@ -73,7 +73,39 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="agregar_jugadores.Designer.vb">
+      <DependentUpon>agregar_jugadores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="agregar_jugadores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Class1.vb" />
     <Compile Include="Conexion.vb" />
+    <Compile Include="crear_torneo.Designer.vb">
+      <DependentUpon>crear_torneo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="crear_torneo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropGenerator.vb" />
+    <Compile Include="drop_torneo.Designer.vb">
+      <DependentUpon>drop_torneo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="drop_torneo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editar_pareja.Designer.vb">
+      <DependentUpon>editar_pareja.vb</DependentUpon>
+    </Compile>
+    <Compile Include="editar_pareja.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editar_torneo.Designer.vb">
+      <DependentUpon>editar_torneo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="editar_torneo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmEditarUsuario.Designer.vb">
       <DependentUpon>frmEditarUsuario.vb</DependentUpon>
     </Compile>
@@ -85,18 +117,6 @@
     </Compile>
     <Compile Include="FrmLogin.Designer.vb">
       <DependentUpon>FrmLogin.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCanchero.Designer.vb">
-      <DependentUpon>frmCanchero.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmCanchero.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmFiscal.Designer.vb">
-      <DependentUpon>frmFiscal.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmFiscal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmListaUsuarios.Designer.vb">
@@ -111,10 +131,29 @@
     <Compile Include="frmNuevoUsuario.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmShell.Designer.vb">
+      <DependentUpon>FrmShell.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmShell.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="lista_inscriptos.Designer.vb">
+      <DependentUpon>lista_inscriptos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="lista_inscriptos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="lista_torneos.Designer.vb">
+      <DependentUpon>lista_torneos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="lista_torneos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -136,8 +175,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PadeLinkDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ParejaTorneo.vb" />
+    <Compile Include="Partido.vb" />
+    <Compile Include="RepositorioParejas.vb" />
+    <Compile Include="RepositorioTorneos.vb" />
+    <Compile Include="SessionInfo.vb" />
+    <Compile Include="ShellHost.vb" />
+    <Compile Include="ToolstripComun.vb" />
+    <Compile Include="ToolstripStylling.vb.vb" />
+    <Compile Include="Zona.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="agregar_jugadores.resx">
+      <DependentUpon>agregar_jugadores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crear_torneo.resx">
+      <DependentUpon>crear_torneo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="drop_torneo.resx">
+      <DependentUpon>drop_torneo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editar_pareja.resx">
+      <DependentUpon>editar_pareja.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editar_torneo.resx">
+      <DependentUpon>editar_torneo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarUsuario.resx">
       <DependentUpon>frmEditarUsuario.vb</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +212,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmShell.resx">
+      <DependentUpon>FrmShell.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lista_inscriptos.resx">
+      <DependentUpon>lista_inscriptos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lista_torneos.resx">
+      <DependentUpon>lista_torneos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -190,6 +262,42 @@
     <None Include="PadeLinkDataSet1.xss">
       <DependentUpon>PadeLinkDataSet1.xsd</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icono login.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icono login %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ahorasilogin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nuevotorneo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Editartorneo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listatorneos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canchero %282%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canchero %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\USUARIO 2 %281%29.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\canchero.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cerrarsesion.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

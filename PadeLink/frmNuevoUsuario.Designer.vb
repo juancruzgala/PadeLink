@@ -31,15 +31,16 @@ Partial Class frmNuevoUsuario
         Me.TxtNombre = New System.Windows.Forms.TextBox()
         Me.txtContrasena = New System.Windows.Forms.TextBox()
         Me.cboRol = New System.Windows.Forms.ComboBox()
+        Me.lblTitulo = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS Reference Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(281, 36)
+        Me.Label1.Location = New System.Drawing.Point(350, 110)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(195, 28)
+        Me.Label1.Size = New System.Drawing.Size(237, 35)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Nuevo Usuario"
         '
@@ -47,20 +48,20 @@ Partial Class frmNuevoUsuario
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(282, 124)
+        Me.Label2.Location = New System.Drawing.Point(356, 172)
         Me.Label2.Name = "Label2"
         Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Label2.Size = New System.Drawing.Size(180, 23)
+        Me.Label2.Size = New System.Drawing.Size(231, 28)
         Me.Label2.TabIndex = 6
-        Me.Label2.Text = "nombre de usuario"
+        Me.Label2.Text = "Nombre de usuario:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(325, 241)
+        Me.Label3.Location = New System.Drawing.Point(393, 275)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(113, 23)
+        Me.Label3.Size = New System.Drawing.Size(136, 28)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "Contraseña"
         '
@@ -68,57 +69,79 @@ Partial Class frmNuevoUsuario
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(361, 340)
+        Me.Label4.Location = New System.Drawing.Point(430, 381)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 23)
+        Me.Label4.Size = New System.Drawing.Size(46, 28)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Rol"
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(136, 474)
+        Me.btnGuardar.BackColor = System.Drawing.Color.Azure
+        Me.btnGuardar.Location = New System.Drawing.Point(332, 504)
+        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(90, 33)
+        Me.btnGuardar.Size = New System.Drawing.Size(101, 41)
         Me.btnGuardar.TabIndex = 10
         Me.btnGuardar.Text = "Guardar"
-        Me.btnGuardar.UseVisualStyleBackColor = True
+        Me.btnGuardar.UseVisualStyleBackColor = False
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(547, 474)
+        Me.btnCancelar.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnCancelar.Location = New System.Drawing.Point(514, 504)
+        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(89, 33)
+        Me.btnCancelar.Size = New System.Drawing.Size(100, 41)
         Me.btnCancelar.TabIndex = 11
         Me.btnCancelar.Text = "Cancelar"
-        Me.btnCancelar.UseVisualStyleBackColor = True
+        Me.btnCancelar.UseVisualStyleBackColor = False
         '
         'TxtNombre
         '
-        Me.TxtNombre.Location = New System.Drawing.Point(283, 175)
+        Me.TxtNombre.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtNombre.Location = New System.Drawing.Point(350, 209)
+        Me.TxtNombre.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.TxtNombre.Name = "TxtNombre"
-        Me.TxtNombre.Size = New System.Drawing.Size(198, 22)
+        Me.TxtNombre.Size = New System.Drawing.Size(222, 30)
         Me.TxtNombre.TabIndex = 12
         '
         'txtContrasena
         '
-        Me.txtContrasena.Location = New System.Drawing.Point(283, 293)
+        Me.txtContrasena.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContrasena.Location = New System.Drawing.Point(350, 313)
+        Me.txtContrasena.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.txtContrasena.Name = "txtContrasena"
-        Me.txtContrasena.Size = New System.Drawing.Size(198, 22)
+        Me.txtContrasena.Size = New System.Drawing.Size(222, 30)
         Me.txtContrasena.TabIndex = 13
         '
         'cboRol
         '
         Me.cboRol.FormattingEnabled = True
-        Me.cboRol.Location = New System.Drawing.Point(283, 376)
+        Me.cboRol.Location = New System.Drawing.Point(350, 413)
+        Me.cboRol.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.cboRol.Name = "cboRol"
-        Me.cboRol.Size = New System.Drawing.Size(198, 24)
+        Me.cboRol.Size = New System.Drawing.Size(222, 28)
         Me.cboRol.TabIndex = 14
+        '
+        'lblTitulo
+        '
+        Me.lblTitulo.AutoSize = True
+        Me.lblTitulo.Font = New System.Drawing.Font("Bahnschrift", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitulo.Location = New System.Drawing.Point(324, 32)
+        Me.lblTitulo.Name = "lblTitulo"
+        Me.lblTitulo.Size = New System.Drawing.Size(293, 43)
+        Me.lblTitulo.TabIndex = 15
+        Me.lblTitulo.Text = "🎾 PADELINK 🎾"
+        Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'frmNuevoUsuario
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(861, 542)
+        Me.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.ClientSize = New System.Drawing.Size(960, 678)
+        Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.cboRol)
         Me.Controls.Add(Me.txtContrasena)
         Me.Controls.Add(Me.TxtNombre)
@@ -128,8 +151,9 @@ Partial Class frmNuevoUsuario
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmNuevoUsuario"
-        Me.Text = "frmNuevoUsuario"
+        Me.Text = "Crear Usuario"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -144,4 +168,5 @@ Partial Class frmNuevoUsuario
     Friend WithEvents TxtNombre As TextBox
     Friend WithEvents txtContrasena As TextBox
     Friend WithEvents cboRol As ComboBox
+    Friend WithEvents lblTitulo As Label
 End Class

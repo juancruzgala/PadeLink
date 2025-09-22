@@ -7,7 +7,6 @@ Public Class frmEditarUsuario
         InitializeComponent()
         _idUsuario = idUsuario
 
-        ' Cargar roles antes de asignar valor seleccionado
         CargarRoles()
 
         TxtNombre.Text = nombre
@@ -15,7 +14,7 @@ Public Class frmEditarUsuario
         cboRol.SelectedValue = idRol
     End Sub
     Private Sub CargarRoles()
-        Using cn As New SqlConnection("Server=BESTIAGALARZA;Database=PadeLink;Trusted_Connection=True;")
+        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
             cn.Open()
             Dim da As New SqlDataAdapter("SELECT id_rol, nombre_rol FROM Roles", cn)
             Dim dt As New DataTable()
@@ -28,7 +27,7 @@ Public Class frmEditarUsuario
 
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Using cn As New SqlConnection("Server=BESTIAGALARZA;Database=PadeLink;Trusted_Connection=True;")
+        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
             cn.Open()
             Dim cmd As New SqlCommand("UPDATE Usuarios 
                                    SET nombre_usuario=@n, contraseña=@p, id_rol=@r

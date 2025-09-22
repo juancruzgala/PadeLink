@@ -36,11 +36,11 @@ Partial Class frmListaUsuarios
         Me.btnSalir = New System.Windows.Forms.Button()
         Me.UsuariosBindingSource2 = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvUsuarios = New System.Windows.Forms.DataGridView()
-        Me.UsuariosBindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
         Me.IdusuarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NombreusuarioDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContraseñaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EstadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UsuariosBindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.PadeLinkDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PadeLinkDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UsuariosRolesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,9 +66,9 @@ Partial Class frmListaUsuarios
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS Reference Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(457, 26)
+        Me.Label1.Location = New System.Drawing.Point(529, 131)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(227, 28)
+        Me.Label1.Size = New System.Drawing.Size(278, 35)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Lista de Usuarios"
         '
@@ -102,18 +102,20 @@ Partial Class frmListaUsuarios
         '
         'btnCrearUsuario
         '
-        Me.btnCrearUsuario.Location = New System.Drawing.Point(97, 578)
+        Me.btnCrearUsuario.Location = New System.Drawing.Point(109, 654)
+        Me.btnCrearUsuario.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnCrearUsuario.Name = "btnCrearUsuario"
-        Me.btnCrearUsuario.Size = New System.Drawing.Size(154, 39)
+        Me.btnCrearUsuario.Size = New System.Drawing.Size(173, 49)
         Me.btnCrearUsuario.TabIndex = 5
         Me.btnCrearUsuario.Text = "Crear Usuario"
         Me.btnCrearUsuario.UseVisualStyleBackColor = True
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(928, 574)
+        Me.btnSalir.Location = New System.Drawing.Point(1044, 654)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(145, 43)
+        Me.btnSalir.Size = New System.Drawing.Size(163, 54)
         Me.btnSalir.TabIndex = 6
         Me.btnSalir.Text = "Salir"
         Me.btnSalir.UseVisualStyleBackColor = True
@@ -129,62 +131,64 @@ Partial Class frmListaUsuarios
         Me.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUsuarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdusuarioDataGridViewTextBoxColumn, Me.NombreusuarioDataGridViewTextBoxColumn, Me.ContraseñaDataGridViewTextBoxColumn, Me.EstadoDataGridViewTextBoxColumn})
         Me.dgvUsuarios.DataSource = Me.UsuariosBindingSource3
-        Me.dgvUsuarios.Location = New System.Drawing.Point(52, 97)
+        Me.dgvUsuarios.Location = New System.Drawing.Point(71, 188)
+        Me.dgvUsuarios.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.dgvUsuarios.Name = "dgvUsuarios"
         Me.dgvUsuarios.RowHeadersWidth = 51
         Me.dgvUsuarios.RowTemplate.Height = 24
-        Me.dgvUsuarios.Size = New System.Drawing.Size(1041, 440)
+        Me.dgvUsuarios.Size = New System.Drawing.Size(1171, 461)
         Me.dgvUsuarios.TabIndex = 7
+        '
+        'IdusuarioDataGridViewTextBoxColumn
+        '
+        Me.IdusuarioDataGridViewTextBoxColumn.DataPropertyName = "id_usuario"
+        Me.IdusuarioDataGridViewTextBoxColumn.HeaderText = "id_usuario"
+        Me.IdusuarioDataGridViewTextBoxColumn.MinimumWidth = 8
+        Me.IdusuarioDataGridViewTextBoxColumn.Name = "IdusuarioDataGridViewTextBoxColumn"
+        Me.IdusuarioDataGridViewTextBoxColumn.ReadOnly = True
+        Me.IdusuarioDataGridViewTextBoxColumn.Width = 150
+        '
+        'NombreusuarioDataGridViewTextBoxColumn
+        '
+        Me.NombreusuarioDataGridViewTextBoxColumn.DataPropertyName = "nombre_usuario"
+        Me.NombreusuarioDataGridViewTextBoxColumn.HeaderText = "nombre_usuario"
+        Me.NombreusuarioDataGridViewTextBoxColumn.MinimumWidth = 8
+        Me.NombreusuarioDataGridViewTextBoxColumn.Name = "NombreusuarioDataGridViewTextBoxColumn"
+        Me.NombreusuarioDataGridViewTextBoxColumn.Width = 150
+        '
+        'ContraseñaDataGridViewTextBoxColumn
+        '
+        Me.ContraseñaDataGridViewTextBoxColumn.DataPropertyName = "contraseña"
+        Me.ContraseñaDataGridViewTextBoxColumn.HeaderText = "contraseña"
+        Me.ContraseñaDataGridViewTextBoxColumn.MinimumWidth = 8
+        Me.ContraseñaDataGridViewTextBoxColumn.Name = "ContraseñaDataGridViewTextBoxColumn"
+        Me.ContraseñaDataGridViewTextBoxColumn.Width = 150
+        '
+        'EstadoDataGridViewTextBoxColumn
+        '
+        Me.EstadoDataGridViewTextBoxColumn.DataPropertyName = "estado"
+        Me.EstadoDataGridViewTextBoxColumn.HeaderText = "estado"
+        Me.EstadoDataGridViewTextBoxColumn.MinimumWidth = 8
+        Me.EstadoDataGridViewTextBoxColumn.Name = "EstadoDataGridViewTextBoxColumn"
+        Me.EstadoDataGridViewTextBoxColumn.Width = 150
         '
         'UsuariosBindingSource3
         '
         Me.UsuariosBindingSource3.DataMember = "Usuarios"
         Me.UsuariosBindingSource3.DataSource = Me.PadeLinkDataSetBindingSource
         '
-        'IdusuarioDataGridViewTextBoxColumn
-        '
-        Me.IdusuarioDataGridViewTextBoxColumn.DataPropertyName = "id_usuario"
-        Me.IdusuarioDataGridViewTextBoxColumn.HeaderText = "id_usuario"
-        Me.IdusuarioDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.IdusuarioDataGridViewTextBoxColumn.Name = "IdusuarioDataGridViewTextBoxColumn"
-        Me.IdusuarioDataGridViewTextBoxColumn.ReadOnly = True
-        Me.IdusuarioDataGridViewTextBoxColumn.Width = 125
-        '
-        'NombreusuarioDataGridViewTextBoxColumn
-        '
-        Me.NombreusuarioDataGridViewTextBoxColumn.DataPropertyName = "nombre_usuario"
-        Me.NombreusuarioDataGridViewTextBoxColumn.HeaderText = "nombre_usuario"
-        Me.NombreusuarioDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.NombreusuarioDataGridViewTextBoxColumn.Name = "NombreusuarioDataGridViewTextBoxColumn"
-        Me.NombreusuarioDataGridViewTextBoxColumn.Width = 125
-        '
-        'ContraseñaDataGridViewTextBoxColumn
-        '
-        Me.ContraseñaDataGridViewTextBoxColumn.DataPropertyName = "contraseña"
-        Me.ContraseñaDataGridViewTextBoxColumn.HeaderText = "contraseña"
-        Me.ContraseñaDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.ContraseñaDataGridViewTextBoxColumn.Name = "ContraseñaDataGridViewTextBoxColumn"
-        Me.ContraseñaDataGridViewTextBoxColumn.Width = 125
-        '
-        'EstadoDataGridViewTextBoxColumn
-        '
-        Me.EstadoDataGridViewTextBoxColumn.DataPropertyName = "estado"
-        Me.EstadoDataGridViewTextBoxColumn.HeaderText = "estado"
-        Me.EstadoDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.EstadoDataGridViewTextBoxColumn.Name = "EstadoDataGridViewTextBoxColumn"
-        Me.EstadoDataGridViewTextBoxColumn.Width = 125
-        '
         'frmListaUsuarios
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1178, 647)
+        Me.ClientSize = New System.Drawing.Size(1325, 881)
         Me.Controls.Add(Me.dgvUsuarios)
         Me.Controls.Add(Me.btnSalir)
         Me.Controls.Add(Me.btnCrearUsuario)
         Me.Controls.Add(Me.Label1)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmListaUsuarios"
-        Me.Text = "frmListaUsuarios"
+        Me.Text = "Lista de Usuarios"
         CType(Me.PadeLinkDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PadeLinkDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UsuariosRolesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
@@ -211,9 +215,9 @@ Partial Class frmListaUsuarios
     Friend WithEvents btnSalir As Button
     Friend WithEvents UsuariosBindingSource2 As BindingSource
     Friend WithEvents dgvUsuarios As DataGridView
+    Friend WithEvents UsuariosBindingSource3 As BindingSource
     Friend WithEvents IdusuarioDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents NombreusuarioDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ContraseñaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EstadoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents UsuariosBindingSource3 As BindingSource
 End Class

@@ -1,6 +1,5 @@
 ﻿Imports System.Windows.Forms
 Imports System.Drawing
-Imports System.Diagnostics.Eventing.Reader
 
 Public Class FrmShell
 
@@ -26,11 +25,9 @@ Public Class FrmShell
     Public Shared Sub ShowInShell(child As Form)
         Dim shell As FrmShell = Nothing
 
-
         If Current IsNot Nothing AndAlso Not Current.IsDisposed Then
             shell = Current
         Else
-
             For Each f As Form In Application.OpenForms
                 If TypeOf f Is FrmShell Then
                     shell = DirectCast(f, FrmShell)
@@ -39,21 +36,17 @@ Public Class FrmShell
             Next
         End If
 
-
         If shell Is Nothing Then
             shell = New FrmShell()
             Current = shell
             shell.Show()
         Else
-
             If Not shell.Visible Then shell.Show()
             shell.BringToFront()
         End If
 
-
         shell.ShowForm(child)
     End Sub
-
 
     Private _child As Form
     Public Sub ShowForm(child As Form)
@@ -74,13 +67,17 @@ Public Class FrmShell
         pnlHost.ResumeLayout()
     End Sub
 
+    ' ========= FIX: chequear existencia de torneos en la BD =========
     Private Function HayTorneos() As Boolean
         Try
-            Return RepositorioTorneos.Listar().Count > 0
+            Return RepositorioTorneos.ExisteAlguno()      ' SELECT TOP 1 1 FROM Torneos
+            ' Alternativa (menos eficiente):
+            ' Return RepositorioTorneos.Listar().Count > 0
         Catch
-            Return (RepositorioTorneos.Torneos IsNot Nothing AndAlso RepositorioTorneos.Torneos.Count > 0)
+            Return False
         End Try
     End Function
+    ' ================================================================
 
     Private Sub FrmShell_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Current = Me
@@ -101,7 +98,6 @@ Public Class FrmShell
         Try : tsbDrop.Image = My.Resources.drop : Catch : End Try
         Try : tsbLogout.Image = My.Resources.cerrarsesion : Catch : End Try
 
-
         For Each b As ToolStripButton In New ToolStripButton() {tsbNuevo, tsbEditar, tsbTorneos, tsbDrop, tsbLogout}
             If b Is Nothing Then Continue For
             b.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
@@ -109,7 +105,6 @@ Public Class FrmShell
             b.ImageScaling = ToolStripItemImageScaling.SizeToFit
             b.ImageTransparentColor = Color.Transparent
         Next
-
 
         Dim cont = ToolStrip2.Parent
         If cont IsNot Nothing Then cont.Controls.SetChildIndex(ToolStrip2, 0)
@@ -143,7 +138,6 @@ Public Class FrmShell
             Exit Sub
         End If
 
-
         Dim modo As ModoLista =
             If(String.Equals(SessionInfo.CurrentRole, "Fiscal", StringComparison.OrdinalIgnoreCase),
                ModoLista.VerInscriptosFiscal,
@@ -165,7 +159,6 @@ Public Class FrmShell
         Logout()
     End Sub
 
-
     Private Sub AplicarPermisosPorRol()
         Try
             Dim role As String = SessionInfo.CurrentRole
@@ -176,7 +169,6 @@ Public Class FrmShell
                 tsbTorneos.Visible = True
                 tsbLogout.Visible = True
             ElseIf String.Equals(role, "Canchero", StringComparison.OrdinalIgnoreCase) Then
-
                 tsbNuevo.Visible = True
                 tsbEditar.Visible = True
                 tsbDrop.Visible = True
@@ -190,12 +182,14 @@ Public Class FrmShell
                 tsbLogout.Visible = True
             End If
         Catch
-
             tsbNuevo.Visible = True
             tsbEditar.Visible = True
             tsbDrop.Visible = True
             tsbTorneos.Visible = True
             tsbLogout.Visible = True
         End Try
+    End Sub
+
+    Private Sub pnlHost_Paint(sender As Object, e As PaintEventArgs) Handles pnlHost.Paint
     End Sub
 End Class

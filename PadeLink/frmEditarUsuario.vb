@@ -14,7 +14,7 @@ Public Class frmEditarUsuario
         cboRol.SelectedValue = idRol
     End Sub
     Private Sub CargarRoles()
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
             Dim da As New SqlDataAdapter("SELECT id_rol, nombre_rol FROM Roles", cn)
             Dim dt As New DataTable()
@@ -27,7 +27,7 @@ Public Class frmEditarUsuario
 
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
             Dim cmd As New SqlCommand("UPDATE Usuarios 
                                    SET nombre_usuario=@n, contraseña=@p, id_rol=@r
@@ -47,6 +47,7 @@ Public Class frmEditarUsuario
         Me.Close()
     End Sub
 
+    Private Sub frmEditarUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+    End Sub
 End Class

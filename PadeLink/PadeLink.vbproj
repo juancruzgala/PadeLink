@@ -79,7 +79,8 @@
     <Compile Include="agregar_jugadores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Class1.vb" />
+    <Compile Include="RepositorioZonas.vb" />
+    <Compile Include="Torneo.vb" />
     <Compile Include="Conexion.vb" />
     <Compile Include="crear_torneo.Designer.vb">
       <DependentUpon>crear_torneo.vb</DependentUpon>

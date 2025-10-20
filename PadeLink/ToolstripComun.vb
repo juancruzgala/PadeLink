@@ -62,11 +62,11 @@ Public Module ToolstripComun
 
     Private Function HayTorneos() As Boolean
         Try
-            Return RepositorioTorneos.Torneos IsNot Nothing AndAlso RepositorioTorneos.Torneos.Count > 0
-            ' o: Return RepositorioTorneos.Listar().Count > 0 si usás Listar()
+            Return RepositorioTorneos.ExisteAlguno()
         Catch
             Return False
         End Try
     End Function
+
 
 End Module

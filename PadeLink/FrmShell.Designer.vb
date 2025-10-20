@@ -38,9 +38,10 @@ Partial Class FrmShell
         '
         'pnlHost
         '
-        Me.pnlHost.Location = New System.Drawing.Point(0, 51)
+        Me.pnlHost.Location = New System.Drawing.Point(0, 41)
+        Me.pnlHost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlHost.Name = "pnlHost"
-        Me.pnlHost.Size = New System.Drawing.Size(1478, 700)
+        Me.pnlHost.Size = New System.Drawing.Size(1314, 560)
         Me.pnlHost.TabIndex = 0
         '
         'ToolStrip2
@@ -53,7 +54,7 @@ Partial Class FrmShell
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ToolStrip2.Size = New System.Drawing.Size(1178, 48)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1047, 38)
         Me.ToolStrip2.TabIndex = 3
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -62,26 +63,26 @@ Partial Class FrmShell
         Me.tsbDrop.Image = Global.PadeLink.My.Resources.Resources.drop
         Me.tsbDrop.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDrop.Name = "tsbDrop"
-        Me.tsbDrop.Size = New System.Drawing.Size(81, 43)
+        Me.tsbDrop.Size = New System.Drawing.Size(71, 35)
         Me.tsbDrop.Text = "Drop"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 48)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 38)
         '
         'tsbTorneos
         '
         Me.tsbTorneos.Image = Global.PadeLink.My.Resources.Resources.listatorneos
         Me.tsbTorneos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbTorneos.Name = "tsbTorneos"
-        Me.tsbTorneos.Size = New System.Drawing.Size(102, 43)
+        Me.tsbTorneos.Size = New System.Drawing.Size(89, 35)
         Me.tsbTorneos.Text = "Torneos"
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 48)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(6, 38)
         '
         'tsbEditar
         '
@@ -89,13 +90,13 @@ Partial Class FrmShell
         Me.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbEditar.Name = "tsbEditar"
-        Me.tsbEditar.Size = New System.Drawing.Size(85, 44)
+        Me.tsbEditar.Size = New System.Drawing.Size(76, 34)
         Me.tsbEditar.Text = "Editar"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 48)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(6, 38)
         '
         'tsbNuevo
         '
@@ -103,29 +104,30 @@ Partial Class FrmShell
         Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(92, 44)
+        Me.tsbNuevo.Size = New System.Drawing.Size(80, 34)
         Me.tsbNuevo.Text = "Nuevo"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 48)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 38)
         '
         'tsbLogout
         '
         Me.tsbLogout.Image = Global.PadeLink.My.Resources.Resources.cerrarsesion
         Me.tsbLogout.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbLogout.Name = "tsbLogout"
-        Me.tsbLogout.Size = New System.Drawing.Size(144, 43)
+        Me.tsbLogout.Size = New System.Drawing.Size(124, 35)
         Me.tsbLogout.Text = "Cerrar Sesion"
         '
         'FrmShell
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1178, 744)
+        Me.ClientSize = New System.Drawing.Size(1047, 595)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlHost)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FrmShell"
         Me.Text = "FrmShell"
         Me.ToolStrip2.ResumeLayout(False)

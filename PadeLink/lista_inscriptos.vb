@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel
+Imports System.Data
 Imports System.Drawing
+Imports System.Runtime.InteropServices
 
 Public Class lista_inscriptos
     Private ReadOnly _torneo As Torneo
@@ -8,6 +10,8 @@ Public Class lista_inscriptos
     Public Sub New(t As Torneo)
         InitializeComponent()
         _torneo = t
+        ' Opcional: doble buffer para menos parpadeo en listas grandes
+        HabilitarDobleBuffer(dgvInscriptos)
     End Sub
 
     Private Sub lista_inscriptos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -18,11 +22,13 @@ Public Class lista_inscriptos
         AsegurarTextoBotones()
     End Sub
 
-
     Private Sub lista_inscriptos_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         dgvInscriptos.Refresh()
     End Sub
 
+    '---------------------------
+    ' Layout + Título
+    '---------------------------
     Private Sub RearmarLayout()
         Me.SuspendLayout()
 
@@ -30,7 +36,7 @@ Public Class lista_inscriptos
             .Dock = DockStyle.Fill,
             .RowCount = 4,
             .ColumnCount = 1,
-            .Padding = New Padding(12, 12, 12, 12),
+            .Padding = New Padding(12),
             .Margin = New Padding(0)
         }
         tlp.RowStyles.Add(New RowStyle(SizeType.Absolute, 8))
@@ -40,7 +46,7 @@ Public Class lista_inscriptos
 
         lblTitulo.AutoSize = True
         lblTitulo.Font = New Font("Bahnschrift", 16.0F, FontStyle.Bold)
-        lblTitulo.Text = If(_torneo Is Nothing, "Inscriptos a ", _torneo.Nombre)
+        lblTitulo.Text = "Lista de Inscriptos"
         lblTitulo.Dock = DockStyle.None
         lblTitulo.Height = 50
         lblTitulo.Padding = New Padding(0, 15, 0, 0)
@@ -48,7 +54,6 @@ Public Class lista_inscriptos
 
         dgvInscriptos.Dock = DockStyle.Fill
         dgvInscriptos.Margin = New Padding(0, 6, 0, 0)
-
 
         Me.Controls.Clear()
         tlp.Controls.Add(New Panel() With {.Dock = DockStyle.Fill}, 0, 0)
@@ -61,11 +66,13 @@ Public Class lista_inscriptos
     End Sub
 
     Private Sub PrepararTitulo()
-        lblTitulo.Text = If(_torneo Is Nothing,
-                            "Lista de Inscriptos",
-                            $"Lista de Inscriptos · {_torneo.Nombre}")
+        Dim nombre = If(_torneo Is Nothing, "(sin torneo)", _torneo.nombre_torneo)
+        lblTitulo.Text = $"Lista de Inscriptos · {nombre}"
     End Sub
 
+    '---------------------------
+    ' Grid
+    '---------------------------
     Private Sub ConfigurarGrid()
         With dgvInscriptos
             .AutoGenerateColumns = False
@@ -80,67 +87,57 @@ Public Class lista_inscriptos
             .DefaultCellStyle.WrapMode = DataGridViewTriState.False
             .EnableHeadersVisualStyles = False
             .ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            .Columns.Clear()
         End With
 
 
         Dim cPareja As New DataGridViewTextBoxColumn() With {
-            .Name = "Pareja",
+            .Name = "Parejas",
             .HeaderText = "Parejas",
-            .DataPropertyName = Nothing,
+            .DataPropertyName = "Pareja",     ' <-- bindea a la propiedad calculada
             .FillWeight = 60,
             .MinimumWidth = 220
         }
-
-
-        Dim cEstado As New DataGridViewTextBoxColumn() With {
+            cPareja.DataPropertyName = "Pareja"
+            Dim cEstado As New DataGridViewTextBoxColumn() With {
             .Name = "Estado",
             .HeaderText = "Estado de Pago",
-            .DataPropertyName = "SeniaOPago",
+            .DataPropertyName = "SeniaOPago", ' <-- bindea directo al estado
             .FillWeight = 25,
             .MinimumWidth = 120
         }
-
-
-        Dim cBtnEditar As New DataGridViewButtonColumn() With {
+            cEstado.DataPropertyName = "SeniaOPago"
+            Dim cBtnEditar As New DataGridViewButtonColumn() With {
             .Name = "AccionEditar",
             .HeaderText = "Acción",
             .Text = "Editar",
             .UseColumnTextForButtonValue = True,
-            .DataPropertyName = Nothing,
             .FillWeight = 7.5F,
             .MinimumWidth = 90
         }
-        Dim cBtnEliminar As New DataGridViewButtonColumn() With {
+            Dim cBtnEliminar As New DataGridViewButtonColumn() With {
             .Name = "AccionEliminar",
             .HeaderText = "Acción",
             .Text = "Eliminar",
             .UseColumnTextForButtonValue = True,
-            .DataPropertyName = Nothing,
             .FillWeight = 7.5F,
             .MinimumWidth = 90
         }
+            dgvInscriptos.Columns.AddRange({cPareja, cEstado, cBtnEditar, cBtnEliminar})
 
-        dgvInscriptos.Columns.AddRange({cPareja, cEstado, cBtnEditar, cBtnEliminar})
     End Sub
 
+
     Private Sub Render()
-        Dim listaPlain As List(Of ParejaTorneo) = RepositorioParejas.Listar(_torneo)
-        _binding = New BindingList(Of ParejaTorneo)(listaPlain)
+        Dim datos As List(Of ParejaTorneo)
+        If _torneo Is Nothing Then
+            datos = New List(Of ParejaTorneo)()
+        Else
+            datos = RepositorioParejas.Listar(_torneo)
+        End If
+        _binding = New BindingList(Of ParejaTorneo)(datos)
         dgvInscriptos.DataSource = _binding
     End Sub
 
-
-    Private Sub dgvInscriptos_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvInscriptos.CellFormatting
-        If e.RowIndex < 0 Then Return
-        If dgvInscriptos.Columns(e.ColumnIndex).Name = "Pareja" Then
-            Dim p = TryCast(dgvInscriptos.Rows(e.RowIndex).DataBoundItem, ParejaTorneo)
-            If p IsNot Nothing Then
-                e.Value = p.Jugador1 & " / " & p.Jugador2
-                e.FormattingApplied = True
-            End If
-        End If
-    End Sub
 
     Private Sub AsegurarTextoBotones()
         For Each col As DataGridViewColumn In dgvInscriptos.Columns
@@ -156,13 +153,19 @@ Public Class lista_inscriptos
         Next
     End Sub
 
-
+    '---------------------------
+    ' Eventos de la grilla
+    '---------------------------
     Private Sub dgvInscriptos_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvInscriptos.CellClick
-        If e.RowIndex <= 0 Then Return
+        If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Return
+
+        Dim colName = dgvInscriptos.Columns(e.ColumnIndex).Name
+        If colName <> "AccionEditar" AndAlso colName <> "AccionEliminar" Then Return
+
         Dim p = TryCast(dgvInscriptos.Rows(e.RowIndex).DataBoundItem, ParejaTorneo)
         If p Is Nothing Then Return
 
-        Select Case dgvInscriptos.Columns(e.ColumnIndex).Name
+        Select Case colName
             Case "AccionEditar"
                 Using f As New editar_pareja(_torneo, p)
                     If f.ShowDialog() = DialogResult.OK Then dgvInscriptos.Refresh()
@@ -178,6 +181,25 @@ Public Class lista_inscriptos
     End Sub
 
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
-        ShellHost.ShowInShell(New lista_torneos() With {.Modo = ModoLista.GestionJugadores})
+        ' Tenías ShellHost; en el resto del proyecto usás FrmShell
+        FrmShell.ShowInShell(New lista_torneos() With {.Modo = ModoLista.GestionJugadores})
     End Sub
+
+    Private Sub dgvInscriptos_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvInscriptos.CellContentClick
+        ' No lo usamos, pero lo dejamos por si tenés lógica en el diseñador
+    End Sub
+
+    '---------------------------
+    ' Utilidad: doble buffer
+    '---------------------------
+    Private Sub HabilitarDobleBuffer(grid As DataGridView)
+        Try
+            Dim t As Type = GetType(DataGridView)
+            Dim pi = t.GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
+            If pi IsNot Nothing Then pi.SetValue(grid, True, Nothing)
+        Catch
+            ' Ignorar si no puede
+        End Try
+    End Sub
+
 End Class

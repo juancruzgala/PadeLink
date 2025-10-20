@@ -34,9 +34,9 @@ Partial Class drop_torneo
         '
         Me.lblTitulo.AutoSize = True
         Me.lblTitulo.Font = New System.Drawing.Font("Bahnschrift", 16.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitulo.Location = New System.Drawing.Point(234, 30)
+        Me.lblTitulo.Location = New System.Drawing.Point(208, 24)
         Me.lblTitulo.Name = "lblTitulo"
-        Me.lblTitulo.Size = New System.Drawing.Size(332, 39)
+        Me.lblTitulo.Size = New System.Drawing.Size(281, 33)
         Me.lblTitulo.TabIndex = 19
         Me.lblTitulo.Text = "Organizacion Partidos"
         '
@@ -47,13 +47,14 @@ Partial Class drop_torneo
         Me.tcZonas.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tcZonas.ItemSize = New System.Drawing.Size(90, 28)
         Me.tcZonas.Location = New System.Drawing.Point(0, 0)
-        Me.tcZonas.MaximumSize = New System.Drawing.Size(900, 600)
-        Me.tcZonas.MinimumSize = New System.Drawing.Size(900, 600)
+        Me.tcZonas.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tcZonas.MaximumSize = New System.Drawing.Size(800, 480)
+        Me.tcZonas.MinimumSize = New System.Drawing.Size(800, 480)
         Me.tcZonas.Multiline = True
         Me.tcZonas.Name = "tcZonas"
         Me.tcZonas.Padding = New System.Drawing.Point(12, 6)
         Me.tcZonas.SelectedIndex = 0
-        Me.tcZonas.Size = New System.Drawing.Size(900, 600)
+        Me.tcZonas.Size = New System.Drawing.Size(800, 480)
         Me.tcZonas.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tcZonas.TabIndex = 20
         '
@@ -61,9 +62,10 @@ Partial Class drop_torneo
         '
         Me.TabPage2.AutoScroll = True
         Me.TabPage2.Location = New System.Drawing.Point(4, 32)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(892, 564)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabPage2.Size = New System.Drawing.Size(792, 444)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "TabPage2"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -71,9 +73,10 @@ Partial Class drop_torneo
         'TabPage1
         '
         Me.TabPage1.Location = New System.Drawing.Point(4, 32)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(892, 564)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.TabPage1.Size = New System.Drawing.Size(792, 444)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -82,22 +85,24 @@ Partial Class drop_torneo
         '
         Me.btnVolver.BackColor = System.Drawing.SystemColors.ControlLight
         Me.btnVolver.Font = New System.Drawing.Font("Bahnschrift", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVolver.Location = New System.Drawing.Point(791, 624)
+        Me.btnVolver.Location = New System.Drawing.Point(703, 499)
+        Me.btnVolver.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnVolver.Name = "btnVolver"
-        Me.btnVolver.Size = New System.Drawing.Size(130, 34)
+        Me.btnVolver.Size = New System.Drawing.Size(116, 27)
         Me.btnVolver.TabIndex = 21
         Me.btnVolver.Text = "Volver"
         Me.btnVolver.UseVisualStyleBackColor = False
         '
         'drop_torneo
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1078, 744)
+        Me.ClientSize = New System.Drawing.Size(958, 595)
         Me.Controls.Add(Me.btnVolver)
         Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.tcZonas)
-        Me.MinimumSize = New System.Drawing.Size(900, 600)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinimumSize = New System.Drawing.Size(802, 489)
         Me.Name = "drop_torneo"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "drop_torneo"

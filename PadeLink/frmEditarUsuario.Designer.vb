@@ -35,26 +35,23 @@ Partial Class frmEditarUsuario
         '
         'txtContrasena
         '
-        Me.txtContrasena.Location = New System.Drawing.Point(312, 262)
-        Me.txtContrasena.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.txtContrasena.Location = New System.Drawing.Point(277, 210)
         Me.txtContrasena.Name = "txtContrasena"
-        Me.txtContrasena.Size = New System.Drawing.Size(235, 26)
+        Me.txtContrasena.Size = New System.Drawing.Size(209, 22)
         Me.txtContrasena.TabIndex = 0
         '
         'TxtNombre
         '
-        Me.TxtNombre.Location = New System.Drawing.Point(312, 154)
-        Me.TxtNombre.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.TxtNombre.Location = New System.Drawing.Point(277, 123)
         Me.TxtNombre.Name = "TxtNombre"
-        Me.TxtNombre.Size = New System.Drawing.Size(222, 26)
+        Me.TxtNombre.Size = New System.Drawing.Size(198, 22)
         Me.TxtNombre.TabIndex = 1
         '
         'btnGuardar
         '
-        Me.btnGuardar.Location = New System.Drawing.Point(289, 452)
-        Me.btnGuardar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnGuardar.Location = New System.Drawing.Point(257, 362)
         Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(101, 41)
+        Me.btnGuardar.Size = New System.Drawing.Size(90, 33)
         Me.btnGuardar.TabIndex = 2
         Me.btnGuardar.Text = "Guardar"
         Me.btnGuardar.UseVisualStyleBackColor = True
@@ -63,9 +60,9 @@ Partial Class frmEditarUsuario
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("MS Reference Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(326, 36)
+        Me.Label1.Location = New System.Drawing.Point(290, 29)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(232, 35)
+        Me.Label1.Size = New System.Drawing.Size(190, 28)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Editar Usuario"
         '
@@ -73,10 +70,10 @@ Partial Class frmEditarUsuario
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(308, 104)
+        Me.Label2.Location = New System.Drawing.Point(274, 83)
         Me.Label2.Name = "Label2"
         Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Label2.Size = New System.Drawing.Size(366, 28)
+        Me.Label2.Size = New System.Drawing.Size(300, 23)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "nombre de usuario (modificado)"
         '
@@ -84,18 +81,17 @@ Partial Class frmEditarUsuario
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(308, 206)
+        Me.Label3.Location = New System.Drawing.Point(274, 165)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(283, 28)
+        Me.Label3.Size = New System.Drawing.Size(233, 23)
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Contraseña (modificada)"
         '
         'btnCancelar
         '
-        Me.btnCancelar.Location = New System.Drawing.Point(435, 452)
-        Me.btnCancelar.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnCancelar.Location = New System.Drawing.Point(387, 362)
         Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(100, 41)
+        Me.btnCancelar.Size = New System.Drawing.Size(89, 33)
         Me.btnCancelar.TabIndex = 7
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = True
@@ -104,26 +100,25 @@ Partial Class frmEditarUsuario
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(318, 315)
+        Me.Label4.Location = New System.Drawing.Point(283, 252)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(193, 28)
+        Me.Label4.Size = New System.Drawing.Size(159, 23)
         Me.Label4.TabIndex = 8
         Me.Label4.Text = "Rol (modificado)"
         '
         'cboRol
         '
         Me.cboRol.FormattingEnabled = True
-        Me.cboRol.Location = New System.Drawing.Point(318, 366)
-        Me.cboRol.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.cboRol.Location = New System.Drawing.Point(283, 293)
         Me.cboRol.Name = "cboRol"
-        Me.cboRol.Size = New System.Drawing.Size(136, 28)
+        Me.cboRol.Size = New System.Drawing.Size(121, 24)
         Me.cboRol.TabIndex = 9
         '
         'frmEditarUsuario
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(878, 544)
+        Me.ClientSize = New System.Drawing.Size(780, 435)
         Me.Controls.Add(Me.cboRol)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnCancelar)
@@ -133,7 +128,6 @@ Partial Class frmEditarUsuario
         Me.Controls.Add(Me.btnGuardar)
         Me.Controls.Add(Me.TxtNombre)
         Me.Controls.Add(Me.txtContrasena)
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmEditarUsuario"
         Me.Text = "Editar Usuario"
         Me.ResumeLayout(False)

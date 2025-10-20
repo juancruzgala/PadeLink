@@ -30,7 +30,7 @@ Public Class frmListaUsuarios
     End Sub
 
     Private Sub CargarUsuarios()
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
 
             Dim sql As String =
@@ -78,7 +78,7 @@ Public Class frmListaUsuarios
     End Sub
 
     Private Sub BloquearUsuario(idUsuario As Integer)
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
             Dim cmd As New SqlCommand("
             UPDATE Usuarios 

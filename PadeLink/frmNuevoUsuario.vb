@@ -8,7 +8,7 @@ Public Class frmNuevoUsuario
     End Sub
 
     Private Sub CargarRoles()
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
             Dim da As New SqlDataAdapter("SELECT id_rol, nombre_rol FROM Roles", cn)
             Dim dt As New DataTable()
@@ -26,7 +26,7 @@ Public Class frmNuevoUsuario
             Return
         End If
 
-        Using cn As New SqlConnection("Server=localhost;Database=padeLink;Trusted_Connection=True;")
+        Using cn As SqlConnection = Conexion.GetConnection()
             cn.Open()
             Dim cmd As New SqlCommand("INSERT INTO Usuarios (nombre_usuario, contraseña, estado, id_rol)
                                        VALUES (@n,@p,'A',@r)", cn)

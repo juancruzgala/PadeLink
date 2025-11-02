@@ -26,7 +26,8 @@ Public Class agregar_jugadores
         cboSeniaPago.Items.Clear()
         cboSeniaPago.Items.AddRange(New Object() {"Pendiente", "Seña", "Pago Total"})
         If cboSeniaPago.Items.Count > 0 Then cboSeniaPago.SelectedIndex = 0
-
+        If txtDni1 IsNot Nothing Then txtDni1.MaxLength = 9
+        If txtDni2 IsNot Nothing Then txtDni2.MaxLength = 9
         txtJugador1.Select()
     End Sub
 
@@ -43,6 +44,8 @@ Public Class agregar_jugadores
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         Dim jugador1 As String = txtJugador1.Text.Trim()
         Dim jugador2 As String = txtJugador2.Text.Trim()
+        Dim dni1 As String = If(txtDni1 Is Nothing, "", txtDni1.Text.Trim())
+        Dim dni2 As String = If(txtDni2 Is Nothing, "", txtDni2.Text.Trim())
         Dim estado As String = If(cboSeniaPago.SelectedItem Is Nothing, "", cboSeniaPago.SelectedItem.ToString())
 
         If String.IsNullOrWhiteSpace(jugador1) OrElse String.IsNullOrWhiteSpace(jugador2) Then
@@ -51,18 +54,44 @@ Public Class agregar_jugadores
             Return
         End If
 
-        Try
-            RepositorioParejas.AgregarBD(_torneo, jugador1, jugador2, estado)
-            MessageBox.Show("Pareja agregada correctamente.", "Éxito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' Validación simple de DNI (opcional pero recomendado)
+        Dim re As New System.Text.RegularExpressions.Regex("^\d{7,9}$")
+        If dni1 <> "" AndAlso Not re.IsMatch(dni1) Then
+            MessageBox.Show("DNI del Jugador 1 inválido (7 a 9 dígitos).", "Atención",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        If dni2 <> "" AndAlso Not re.IsMatch(dni2) Then
+            MessageBox.Show("DNI del Jugador 2 inválido (7 a 9 dígitos).", "Atención",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
 
+        Try
+            RepositorioParejas.AgregarBD(_torneo, jugador1, jugador2, estado, dni1, dni2)
+            MessageBox.Show("Pareja agregada correctamente.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information)
             txtJugador1.Clear() : txtJugador2.Clear()
+            txtDni1.Clear() : txtDni2.Clear()
             If cboSeniaPago.Items.Count > 0 Then cboSeniaPago.SelectedIndex = 0
-            txtJugador1.Focus()
-        Catch ex As SqlException
-            MessageBox.Show("Error al agregar la pareja: " & ex.Message, "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As SqlClient.SqlException When ex.Number = 2627 OrElse ex.Number = 2601
+            ' 2627: UNIQUE KEY violation  |  2601: Cannot insert duplicate key row
+            MessageBox.Show("Ese DNI ya está registrado para otro jugador. Verificá los DNIs.", "DNI duplicado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Catch ex As Exception
+            MessageBox.Show("Ocurrió un error al guardar la pareja." & Environment.NewLine & ex.Message,
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+    End Sub
+
+
+    Private Sub txtDni_KeyPress(sender As Object, e As KeyPressEventArgs) _
+    Handles txtDni1.KeyPress, txtDni2.KeyPress
+        ' permite dígitos y teclas de control (backspace, etc.)
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
     End Sub
 
 
@@ -101,5 +130,6 @@ Public Class agregar_jugadores
         Dim l As New lista_torneos() With {.Modo = ModoLista.GestionJugadores}
         FrmShell.ShowInShell(l)
     End Sub
+
 
 End Class

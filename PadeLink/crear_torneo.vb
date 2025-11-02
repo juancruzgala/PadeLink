@@ -2,7 +2,6 @@
 Imports System.Data.SqlClient
 Imports System.Globalization
 
-
 Public Class crear_torneo
 
     Private dtCategorias As DataTable
@@ -128,6 +127,7 @@ Public Class crear_torneo
             End If
 
             Dim fila As DataGridViewRow = dgvDatos.Rows(0)
+
             Dim maximoParejas As Integer
             If Not Integer.TryParse(Convert.ToString(fila.Cells("MaximoParejas").Value), maximoParejas) OrElse maximoParejas < 0 Then
                 MessageBox.Show("Ingresá un número válido en 'Máximo de Parejas'.")
@@ -159,12 +159,11 @@ Public Class crear_torneo
                 .fecha = dtpDesde.Value.Date,
                 .fecha_hasta = dtpHasta.Value.Date,
                 .id_categoria = idCategoria,
-                .id_canchero = SessionInfo.id_usuario,  ' <-- canchero de la sesión
+                .id_canchero = SessionInfo.id_usuario,  ' canchero de la sesión
                 .id_fiscal = CInt(cboFiscal.SelectedValue),
                 .max_parejas = maximoParejas,
                 .precio_inscripcion = precioInscripcion
             }
-
 
             Dim idGen = InsertarTorneo(nuevo)
 
@@ -184,9 +183,9 @@ Public Class crear_torneo
     Private Function InsertarTorneo(t As Torneo) As Integer
         Const sql As String =
 "INSERT INTO dbo.Torneos
- (nombre_torneo, fecha, fecha_hasta, hora_inicio, id_categoria, id_canchero, id_fiscal, max_parejas, precio_inscripcion)
+ (nombre_torneo, fecha, fecha_hasta, hora_inicio, id_categoria, id_canchero, id_fiscal, max_parejas, monto_inscripcion)
  VALUES
- (@nombre, @fecha, @fechahasta, @hora, @idcat, @idcanchero, @idfiscal, @maxparejas, @precio);
+ (@nombre, @fecha, @fechahasta, @hora, @idcat, @idcanchero, @idfiscal, @maxparejas, @monto_inscripcion);
  SELECT CAST(SCOPE_IDENTITY() AS INT);"
 
         Using cn = Conexion.GetConnection(), cmd As New SqlCommand(sql, cn)
@@ -198,10 +197,7 @@ Public Class crear_torneo
             cmd.Parameters.Add("@idcanchero", SqlDbType.Int).Value = t.id_canchero
             cmd.Parameters.Add("@idfiscal", SqlDbType.Int).Value = t.id_fiscal
             cmd.Parameters.Add("@maxparejas", SqlDbType.Int).Value = t.max_parejas
-
-            Dim p = cmd.Parameters.Add("@precio", SqlDbType.Decimal)
-            p.Precision = 10 : p.Scale = 2
-            p.Value = t.precio_inscripcion
+            cmd.Parameters.AddWithValue("@monto_inscripcion", SqlDbType.Decimal).Value = t.precio_inscripcion
 
             cn.Open()
             Return CInt(cmd.ExecuteScalar())

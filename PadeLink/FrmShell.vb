@@ -8,7 +8,7 @@ Public Class FrmShell
     Public Shared Sub Logout()
         SessionInfo.CurrentUser = Nothing
         SessionInfo.CurrentRole = Nothing
-
+        SessionInfo.id_usuario = Nothing
         Dim login As New Frmlogin()
         login.Show()
         If Current IsNot Nothing AndAlso Not Current.IsDisposed Then
@@ -70,9 +70,7 @@ Public Class FrmShell
     ' ========= FIX: chequear existencia de torneos en la BD =========
     Private Function HayTorneos() As Boolean
         Try
-            Return RepositorioTorneos.ExisteAlguno()      ' SELECT TOP 1 1 FROM Torneos
-            ' Alternativa (menos eficiente):
-            ' Return RepositorioTorneos.Listar().Count > 0
+            Return RepositorioTorneos.ExisteAlguno()
         Catch
             Return False
         End Try
@@ -97,8 +95,14 @@ Public Class FrmShell
         Try : tsbTorneos.Image = My.Resources.listatorneos : Catch : End Try
         Try : tsbDrop.Image = My.Resources.drop : Catch : End Try
         Try : tsbLogout.Image = My.Resources.cerrarsesion : Catch : End Try
+        Try : tsbBusqueda.Image = My.Resources.Editartorneo : Catch : End Try
+        Try : tsbBackup.Image = My.Resources.drop : Catch : End Try
 
-        For Each b As ToolStripButton In New ToolStripButton() {tsbNuevo, tsbEditar, tsbTorneos, tsbDrop, tsbLogout}
+
+
+        Try : tsbReportes.Image = My.Resources.listatorneos : Catch : End Try
+
+        For Each b As ToolStripButton In New ToolStripButton() {tsbNuevo, tsbEditar, tsbBackup, tsbTorneos, tsbDrop, tsbLogout, tsbBusqueda, tsbReportes}
             If b Is Nothing Then Continue For
             b.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             b.TextImageRelation = TextImageRelation.ImageBeforeText
@@ -116,6 +120,10 @@ Public Class FrmShell
     Private Sub FrmShell_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         If Current Is Me Then Current = Nothing
         Application.Exit()
+    End Sub
+
+    Private Sub tsbBusqueda_Click(sender As Object, e As EventArgs) Handles tsbBusqueda.Click
+        ShowForm(New busqueda_fiscal())
     End Sub
 
     Private Sub tsbNuevo_Click(sender As Object, e As EventArgs) Handles tsbNuevo.Click
@@ -155,6 +163,14 @@ Public Class FrmShell
         ShowForm(New lista_torneos() With {.Modo = ModoLista.GenerarDrop})
     End Sub
 
+    Private Sub tsbReportes_Click(sender As Object, e As EventArgs) Handles tsbReportes.Click
+        ShowForm(New FrmReportes())
+    End Sub
+
+    Private Sub tsbBackup_Click(sender As Object, e As EventArgs) Handles tsbBackup.Click
+        ShowForm(New FrmBackupRestore())
+    End Sub
+
     Private Sub tsbLogout_Click(sender As Object, e As EventArgs) Handles tsbLogout.Click
         Logout()
     End Sub
@@ -168,18 +184,27 @@ Public Class FrmShell
                 tsbDrop.Visible = True
                 tsbTorneos.Visible = True
                 tsbLogout.Visible = True
+                tsbReportes.Visible = True
+                tsbBusqueda.Visible = True
+                tsbBackup.Visible = False
             ElseIf String.Equals(role, "Canchero", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = True
                 tsbEditar.Visible = True
                 tsbDrop.Visible = True
                 tsbTorneos.Visible = True
                 tsbLogout.Visible = True
+                tsbReportes.Visible = True
+                tsbBusqueda.Visible = False
+                tsbBackup.Visible = False
             ElseIf String.Equals(role, "Administrador", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = False
                 tsbEditar.Visible = False
                 tsbDrop.Visible = False
                 tsbTorneos.Visible = True
                 tsbLogout.Visible = True
+                tsbReportes.Visible = True
+                tsbBusqueda.Visible = False
+                tsbBackup.Visible = True
             End If
         Catch
             tsbNuevo.Visible = True
@@ -187,9 +212,11 @@ Public Class FrmShell
             tsbDrop.Visible = True
             tsbTorneos.Visible = True
             tsbLogout.Visible = True
+            tsbReportes.Visible = True
+            tsbBusqueda.Visible = True
+            tsbBackup.Visible = True
         End Try
     End Sub
 
-    Private Sub pnlHost_Paint(sender As Object, e As PaintEventArgs) Handles pnlHost.Paint
-    End Sub
+
 End Class

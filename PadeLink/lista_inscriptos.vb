@@ -106,23 +106,23 @@ Public Class lista_inscriptos
             .MinimumWidth = 120
         }
             cEstado.DataPropertyName = "SeniaOPago"
-            Dim cBtnEditar As New DataGridViewButtonColumn() With {
+        Dim cBtnEditar As New DataGridViewButtonColumn() With {
             .Name = "AccionEditar",
-            .HeaderText = "Acción",
+            .HeaderText = "Editar",
             .Text = "Editar",
             .UseColumnTextForButtonValue = True,
             .FillWeight = 7.5F,
             .MinimumWidth = 90
         }
-            Dim cBtnEliminar As New DataGridViewButtonColumn() With {
+        Dim cBtnEliminar As New DataGridViewButtonColumn() With {
             .Name = "AccionEliminar",
-            .HeaderText = "Acción",
+            .HeaderText = "Eliminar",
             .Text = "Eliminar",
             .UseColumnTextForButtonValue = True,
             .FillWeight = 7.5F,
             .MinimumWidth = 90
         }
-            dgvInscriptos.Columns.AddRange({cPareja, cEstado, cBtnEditar, cBtnEliminar})
+        dgvInscriptos.Columns.AddRange({cPareja, cEstado, cBtnEditar, cBtnEliminar})
 
     End Sub
 

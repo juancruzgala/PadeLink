@@ -22,6 +22,7 @@ Partial Class FrmShell
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmShell))
         Me.pnlHost = New System.Windows.Forms.Panel()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.tsbDrop = New System.Windows.Forms.ToolStripButton()
@@ -33,6 +34,9 @@ Partial Class FrmShell
         Me.tsbNuevo = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbLogout = New System.Windows.Forms.ToolStripButton()
+        Me.tsbReportes = New System.Windows.Forms.ToolStripButton()
+        Me.tsbBusqueda = New System.Windows.Forms.ToolStripButton()
+        Me.tsbBackup = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -49,12 +53,12 @@ Partial Class FrmShell
         Me.ToolStrip2.AutoSize = False
         Me.ToolStrip2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbDrop, Me.ToolStripSeparator4, Me.tsbTorneos, Me.ToolStripSeparator5, Me.tsbEditar, Me.ToolStripSeparator6, Me.tsbNuevo, Me.ToolStripSeparator1, Me.tsbLogout})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbDrop, Me.ToolStripSeparator4, Me.tsbTorneos, Me.ToolStripSeparator5, Me.tsbEditar, Me.ToolStripSeparator6, Me.tsbNuevo, Me.ToolStripSeparator1, Me.tsbLogout, Me.tsbReportes, Me.tsbBusqueda, Me.tsbBackup})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ToolStrip2.Size = New System.Drawing.Size(1047, 38)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1175, 38)
         Me.ToolStrip2.TabIndex = 3
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -120,11 +124,35 @@ Partial Class FrmShell
         Me.tsbLogout.Size = New System.Drawing.Size(124, 35)
         Me.tsbLogout.Text = "Cerrar Sesion"
         '
+        'tsbReportes
+        '
+        Me.tsbReportes.Image = CType(resources.GetObject("tsbReportes.Image"), System.Drawing.Image)
+        Me.tsbReportes.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbReportes.Name = "tsbReportes"
+        Me.tsbReportes.Size = New System.Drawing.Size(96, 35)
+        Me.tsbReportes.Text = "Reportes"
+        '
+        'tsbBusqueda
+        '
+        Me.tsbBusqueda.Image = CType(resources.GetObject("tsbBusqueda.Image"), System.Drawing.Image)
+        Me.tsbBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbBusqueda.Name = "tsbBusqueda"
+        Me.tsbBusqueda.Size = New System.Drawing.Size(102, 35)
+        Me.tsbBusqueda.Text = "Busqueda"
+        '
+        'tsbBackup
+        '
+        Me.tsbBackup.Image = CType(resources.GetObject("tsbBackup.Image"), System.Drawing.Image)
+        Me.tsbBackup.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbBackup.Name = "tsbBackup"
+        Me.tsbBackup.Size = New System.Drawing.Size(138, 35)
+        Me.tsbBackup.Text = "Mantenimiento"
+        '
         'FrmShell
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1047, 595)
+        Me.ClientSize = New System.Drawing.Size(1175, 605)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlHost)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -147,4 +175,7 @@ Partial Class FrmShell
     Friend WithEvents tsbNuevo As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents tsbLogout As ToolStripButton
+    Friend WithEvents tsbReportes As ToolStripButton
+    Friend WithEvents tsbBusqueda As ToolStripButton
+    Friend WithEvents tsbBackup As ToolStripButton
 End Class

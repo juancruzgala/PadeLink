@@ -27,8 +27,8 @@ Partial Class lista_inscriptos
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.dgvInscriptos = New System.Windows.Forms.DataGridView()
         Me.btnVolver = New System.Windows.Forms.Button()
-        Me.Accion = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Eliminar = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.Accion = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvInscriptos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -88,19 +88,19 @@ Partial Class lista_inscriptos
         Me.btnVolver.Text = "Volver"
         Me.btnVolver.UseVisualStyleBackColor = False
         '
-        'Accion
-        '
-        Me.Accion.HeaderText = "Editar"
-        Me.Accion.MinimumWidth = 6
-        Me.Accion.Name = "Accion"
-        Me.Accion.Width = 125
-        '
         'Eliminar
         '
         Me.Eliminar.HeaderText = "Eliminar"
         Me.Eliminar.MinimumWidth = 6
         Me.Eliminar.Name = "Eliminar"
         Me.Eliminar.Width = 125
+        '
+        'Accion
+        '
+        Me.Accion.HeaderText = "Editar"
+        Me.Accion.MinimumWidth = 6
+        Me.Accion.Name = "Accion"
+        Me.Accion.Width = 125
         '
         'lista_inscriptos
         '

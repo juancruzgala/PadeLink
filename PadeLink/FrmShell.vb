@@ -4,24 +4,70 @@ Imports System.Drawing
 Public Class FrmShell
 
     Public Shared Property Current As FrmShell
+    Private _child As Form
 
+    ' ==============================
+    ' MÉTODO LOGOUT (CORREGIDO Y SEGURO)
+    ' ==============================
     Public Shared Sub Logout()
-        SessionInfo.CurrentUser = Nothing
-        SessionInfo.CurrentRole = Nothing
-        SessionInfo.id_usuario = Nothing
-        Dim login As New Frmlogin()
-        login.Show()
-        If Current IsNot Nothing AndAlso Not Current.IsDisposed Then
-            If Current._child IsNot Nothing AndAlso Not Current._child.IsDisposed Then
-                Current._child.Close()
-                Current._child.Dispose()
-                Current._child = Nothing
-                Current.pnlHost.Controls.Clear()
+        Try
+            ' --- Limpiar sesión ---
+            SessionInfo.CurrentUser = Nothing
+            SessionInfo.CurrentRole = Nothing
+            SessionInfo.id_usuario = Nothing
+
+            ' --- Cerrar formulario principal si existe ---
+            Dim shell As FrmShell = Nothing
+
+            ' Buscar instancia activa (por seguridad)
+            If Current IsNot Nothing AndAlso Not Current.IsDisposed Then
+                shell = Current
+            Else
+                shell = Application.OpenForms().OfType(Of FrmShell)().FirstOrDefault()
             End If
-            Current.Hide()
-        End If
+
+            ' Cerrar shell y su contenido
+            If shell IsNot Nothing Then
+                If shell._child IsNot Nothing AndAlso Not shell._child.IsDisposed Then
+                    Try
+                        shell._child.Close()
+                        shell._child.Dispose()
+                    Catch
+                    End Try
+                    shell._child = Nothing
+                End If
+
+                If shell.pnlHost IsNot Nothing AndAlso Not shell.pnlHost.IsDisposed Then
+                    Try
+                        shell.pnlHost.Controls.Clear()
+                    Catch
+                    End Try
+                End If
+
+                Try
+                    shell.Close()
+                    shell.Dispose()
+                Catch
+                End Try
+            End If
+
+            ' --- Limpiar referencia estática ---
+            Current = Nothing
+
+            ' --- Volver al login ---
+            Dim login As New Frmlogin()
+            login.Show()
+
+        Catch ex As Exception
+            MessageBox.Show("Error al cerrar la sesión: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
+
+
+    ' ==============================
+    ' MOSTRAR FORMULARIO EN SHELL
+    ' ==============================
     Public Shared Sub ShowInShell(child As Form)
         Dim shell As FrmShell = Nothing
 
@@ -48,26 +94,34 @@ Public Class FrmShell
         shell.ShowForm(child)
     End Sub
 
-    Private _child As Form
+
+    ' ==============================
+    ' CARGA DE FORMULARIO HIJO
+    ' ==============================
     Public Sub ShowForm(child As Form)
-        If _child IsNot Nothing AndAlso Not _child.IsDisposed Then
-            _child.Close()
-            _child.Dispose()
-        End If
+        Try
+            If _child IsNot Nothing AndAlso Not _child.IsDisposed Then
+                _child.Close()
+                _child.Dispose()
+            End If
 
-        _child = child
-        _child.TopLevel = False
-        _child.FormBorderStyle = FormBorderStyle.None
-        _child.Dock = DockStyle.Fill
+            _child = child
+            _child.TopLevel = False
+            _child.FormBorderStyle = FormBorderStyle.None
+            _child.Dock = DockStyle.Fill
 
-        pnlHost.SuspendLayout()
-        pnlHost.Controls.Clear()
-        pnlHost.Controls.Add(_child)
-        _child.Show()
-        pnlHost.ResumeLayout()
+            pnlHost.SuspendLayout()
+            pnlHost.Controls.Clear()
+            pnlHost.Controls.Add(_child)
+            _child.Show()
+            pnlHost.ResumeLayout()
+
+        Catch ex As Exception
+            MessageBox.Show("Error al cargar el formulario: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
-    ' ========= FIX: chequear existencia de torneos en la BD =========
+
     Private Function HayTorneos() As Boolean
         Try
             Return RepositorioTorneos.ExisteAlguno()
@@ -75,31 +129,25 @@ Public Class FrmShell
             Return False
         End Try
     End Function
-    ' ================================================================
+
 
     Private Sub FrmShell_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Current = Me
-
         pnlHost.Dock = DockStyle.Fill
 
         ToolstripStyling.FixToolStrip(ToolStrip2)
-
         ToolStrip2.RenderMode = ToolStripRenderMode.Professional
         ToolStrip2.BackColor = Color.FromArgb(235, 239, 243)
         ToolStrip2.ForeColor = Color.Black
         ToolStrip2.Dock = DockStyle.Top
-        pnlHost.Dock = DockStyle.Fill
 
         Try : tsbNuevo.Image = My.Resources.nuevotorneo : Catch : End Try
         Try : tsbEditar.Image = My.Resources.Editartorneo : Catch : End Try
         Try : tsbTorneos.Image = My.Resources.listatorneos : Catch : End Try
         Try : tsbDrop.Image = My.Resources.drop : Catch : End Try
-        Try : tsbLogout.Image = My.Resources.cerrarsesion : Catch : End Try
-        Try : tsbBusqueda.Image = My.Resources.Editartorneo : Catch : End Try
-        Try : tsbBackup.Image = My.Resources.drop : Catch : End Try
-
-
-
+        Try : tsbLogout.Image = My.Resources._1828407 : Catch : End Try
+        Try : tsbBusqueda.Image = My.Resources._2965314 : Catch : End Try
+        Try : tsbBackup.Image = My.Resources._10365581 : Catch : End Try
         Try : tsbReportes.Image = My.Resources.listatorneos : Catch : End Try
 
         For Each b As ToolStripButton In New ToolStripButton() {tsbNuevo, tsbEditar, tsbBackup, tsbTorneos, tsbDrop, tsbLogout, tsbBusqueda, tsbReportes}
@@ -115,13 +163,23 @@ Public Class FrmShell
         ToolStrip2.BringToFront()
 
         AplicarPermisosPorRol()
+        ShowForm(New frmBienvenida())
     End Sub
+
 
     Private Sub FrmShell_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         If Current Is Me Then Current = Nothing
-        Application.Exit()
+        If Application.OpenForms().Count = 0 Then
+            Application.ExitThread()
+            Application.Exit()
+        End If
+
     End Sub
 
+
+    ' ==============================
+    ' BOTONES TOOLSTRIP
+    ' ==============================
     Private Sub tsbBusqueda_Click(sender As Object, e As EventArgs) Handles tsbBusqueda.Click
         ShowForm(New busqueda_fiscal())
     End Sub
@@ -132,8 +190,7 @@ Public Class FrmShell
 
     Private Sub tsbEditar_Click(sender As Object, e As EventArgs) Handles tsbEditar.Click
         If Not HayTorneos() Then
-            MessageBox.Show("Aún no se han creado torneos.", "Información",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Aún no se han creado torneos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
         ShowForm(New lista_torneos() With {.Modo = ModoLista.EditarTorneo})
@@ -141,8 +198,7 @@ Public Class FrmShell
 
     Private Sub tsbTorneos_Click(sender As Object, e As EventArgs) Handles tsbTorneos.Click
         If Not HayTorneos() Then
-            MessageBox.Show("Aún no se han creado torneos.", "Información",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Aún no se han creado torneos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
 
@@ -156,8 +212,7 @@ Public Class FrmShell
 
     Private Sub tsbDrop_Click(sender As Object, e As EventArgs) Handles tsbDrop.Click
         If Not HayTorneos() Then
-            MessageBox.Show("Aún no se han creado torneos.", "Información",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Aún no se han creado torneos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
         ShowForm(New lista_torneos() With {.Modo = ModoLista.GenerarDrop})
@@ -176,8 +231,11 @@ Public Class FrmShell
     End Sub
 
     Private Sub AplicarPermisosPorRol()
+        ShowForm(New frmBienvenida())
+
         Try
             Dim role As String = SessionInfo.CurrentRole
+
             If String.Equals(role, "Fiscal", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = False
                 tsbEditar.Visible = False
@@ -187,6 +245,7 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = True
                 tsbBackup.Visible = False
+
             ElseIf String.Equals(role, "Canchero", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = True
                 tsbEditar.Visible = True
@@ -196,6 +255,7 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = False
                 tsbBackup.Visible = False
+
             ElseIf String.Equals(role, "Administrador", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = False
                 tsbEditar.Visible = False
@@ -205,7 +265,9 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = False
                 tsbBackup.Visible = True
+                
             End If
+
         Catch
             tsbNuevo.Visible = True
             tsbEditar.Visible = True
@@ -217,6 +279,5 @@ Public Class FrmShell
             tsbBackup.Visible = True
         End Try
     End Sub
-
 
 End Class

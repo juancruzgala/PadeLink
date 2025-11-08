@@ -167,9 +167,8 @@ Public Class lista_inscriptos
 
         Select Case colName
             Case "AccionEditar"
-                Using f As New editar_pareja(_torneo, p)
-                    If f.ShowDialog() = DialogResult.OK Then dgvInscriptos.Refresh()
-                End Using
+                Dim f As New editar_pareja(_torneo, p)
+                FrmShell.ShowInShell(f)
 
             Case "AccionEliminar"
                 If MessageBox.Show($"¿Eliminar a {p.Jugador1} / {p.Jugador2}?",

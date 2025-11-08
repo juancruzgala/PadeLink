@@ -25,7 +25,7 @@ Public Module ToolstripStyling
                 Dim b = DirectCast(it, ToolStripButton)
                 b.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                 b.TextImageRelation = TextImageRelation.ImageBeforeText
-                b.ImageScaling = ToolStripItemImageScaling.SizeToFit   ' <- clave para que no “desaparezcan”
+                b.ImageScaling = ToolStripItemImageScaling.SizeToFit
                 b.ImageTransparentColor = Color.Transparent
                 b.Width = 90
             ElseIf TypeOf it Is ToolStripSeparator Then

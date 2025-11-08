@@ -18,22 +18,18 @@ Public Class Frmlogin
         SessionInfo.CurrentUser = info.Value.nombre_usuario
         SessionInfo.CurrentRole = info.Value.rol
 
-        ' --- Abrir Shell y la vista inicial según rol ---
+        ' --- Abrir Shell y mostrar la vista de bienvenida ---
         Dim shell As FrmShell = If(FrmShell.Current, New FrmShell())
         FrmShell.Current = shell
-        If Not shell.Visible Then shell.Show()
 
-        Dim startForm As Form
-        Select Case info.Value.rol
-            Case "Administrador" : startForm = New frmListaUsuarios()
-            Case "Canchero" : startForm = New crear_torneo()
-            Case "Fiscal" : startForm = New lista_torneos()
-            Case Else
-                MessageBox.Show("Rol desconocido: " & info.Value.rol)
-                Exit Sub
-        End Select
+        If Not shell.Visible Then
+            shell.Show()
+        End If
 
-        shell.ShowForm(startForm)
+        ' Mostrar la pantalla de bienvenida personalizada según el rol
+        shell.ShowForm(New frmBienvenida())
+
+        ' Ocultar el login
         Me.Hide()
     End Sub
 
@@ -79,4 +75,6 @@ Public Class Frmlogin
     Private Sub Frmlogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' opcional: txtUsuario.Focus()
     End Sub
+
 End Class
+

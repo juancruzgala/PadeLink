@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FrmBackupRestore
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmBackupRestore
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblNombre = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -35,16 +35,15 @@ Partial Class FrmBackupRestore
         Me.btnRestaurar = New System.Windows.Forms.Button()
         Me.txtBackupDestino = New System.Windows.Forms.TextBox()
         Me.txtBakOrigen = New System.Windows.Forms.TextBox()
-        Me.lblStatus = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblNombre
         '
         Me.lblNombre.AutoSize = True
         Me.lblNombre.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNombre.Location = New System.Drawing.Point(218, 247)
+        Me.lblNombre.Location = New System.Drawing.Point(245, 324)
         Me.lblNombre.Name = "lblNombre"
-        Me.lblNombre.Size = New System.Drawing.Size(151, 21)
+        Me.lblNombre.Size = New System.Drawing.Size(180, 24)
         Me.lblNombre.TabIndex = 29
         Me.lblNombre.Text = "Origen del Backup:"
         '
@@ -52,9 +51,9 @@ Partial Class FrmBackupRestore
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(489, 205)
+        Me.Label1.Location = New System.Drawing.Point(550, 286)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(86, 21)
+        Me.Label1.Size = New System.Drawing.Size(102, 24)
         Me.Label1.TabIndex = 30
         Me.Label1.Text = "Restaurar"
         '
@@ -62,9 +61,9 @@ Partial Class FrmBackupRestore
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(238, 100)
+        Me.Label2.Location = New System.Drawing.Point(268, 125)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(131, 21)
+        Me.Label2.Size = New System.Drawing.Size(155, 24)
         Me.Label2.TabIndex = 31
         Me.Label2.Text = "Backup Destino:"
         '
@@ -72,9 +71,9 @@ Partial Class FrmBackupRestore
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(510, 67)
+        Me.Label3.Location = New System.Drawing.Point(574, 84)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 21)
+        Me.Label3.Size = New System.Drawing.Size(77, 24)
         Me.Label3.TabIndex = 32
         Me.Label3.Text = "Backup"
         '
@@ -82,10 +81,10 @@ Partial Class FrmBackupRestore
         '
         Me.btnElegirDestino.BackColor = System.Drawing.Color.Azure
         Me.btnElegirDestino.Font = New System.Drawing.Font("Bahnschrift", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnElegirDestino.Location = New System.Drawing.Point(681, 100)
+        Me.btnElegirDestino.Location = New System.Drawing.Point(766, 125)
         Me.btnElegirDestino.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnElegirDestino.Name = "btnElegirDestino"
-        Me.btnElegirDestino.Size = New System.Drawing.Size(156, 30)
+        Me.btnElegirDestino.Size = New System.Drawing.Size(176, 38)
         Me.btnElegirDestino.TabIndex = 44
         Me.btnElegirDestino.Text = "Elegir Destino"
         Me.btnElegirDestino.UseVisualStyleBackColor = False
@@ -94,10 +93,10 @@ Partial Class FrmBackupRestore
         '
         Me.btnHacerBackup.BackColor = System.Drawing.Color.Azure
         Me.btnHacerBackup.Font = New System.Drawing.Font("Bahnschrift", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnHacerBackup.Location = New System.Drawing.Point(467, 138)
+        Me.btnHacerBackup.Location = New System.Drawing.Point(525, 172)
         Me.btnHacerBackup.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnHacerBackup.Name = "btnHacerBackup"
-        Me.btnHacerBackup.Size = New System.Drawing.Size(156, 32)
+        Me.btnHacerBackup.Size = New System.Drawing.Size(176, 40)
         Me.btnHacerBackup.TabIndex = 45
         Me.btnHacerBackup.Text = "Hacer Backup"
         Me.btnHacerBackup.UseVisualStyleBackColor = False
@@ -106,10 +105,10 @@ Partial Class FrmBackupRestore
         '
         Me.btnElegirBak.BackColor = System.Drawing.Color.Azure
         Me.btnElegirBak.Font = New System.Drawing.Font("Bahnschrift", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnElegirBak.Location = New System.Drawing.Point(681, 242)
+        Me.btnElegirBak.Location = New System.Drawing.Point(766, 317)
         Me.btnElegirBak.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnElegirBak.Name = "btnElegirBak"
-        Me.btnElegirBak.Size = New System.Drawing.Size(156, 32)
+        Me.btnElegirBak.Size = New System.Drawing.Size(176, 40)
         Me.btnElegirBak.TabIndex = 46
         Me.btnElegirBak.Text = "Elegir Backup"
         Me.btnElegirBak.UseVisualStyleBackColor = False
@@ -118,26 +117,27 @@ Partial Class FrmBackupRestore
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(346, 286)
+        Me.Label4.Location = New System.Drawing.Point(389, 373)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(374, 21)
+        Me.Label4.Size = New System.Drawing.Size(446, 24)
         Me.Label4.TabIndex = 47
         Me.Label4.Text = "Para restaurar escribir ""RESTAURAR PadeLink"":"
         '
         'txtConfirmacion
         '
-        Me.txtConfirmacion.Location = New System.Drawing.Point(350, 333)
+        Me.txtConfirmacion.Location = New System.Drawing.Point(394, 416)
         Me.txtConfirmacion.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtConfirmacion.Name = "txtConfirmacion"
-        Me.txtConfirmacion.Size = New System.Drawing.Size(370, 22)
+        Me.txtConfirmacion.Size = New System.Drawing.Size(416, 26)
         Me.txtConfirmacion.TabIndex = 48
         '
         'chkEstoySeguro
         '
         Me.chkEstoySeguro.AutoSize = True
-        Me.chkEstoySeguro.Location = New System.Drawing.Point(467, 372)
+        Me.chkEstoySeguro.Location = New System.Drawing.Point(525, 465)
+        Me.chkEstoySeguro.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.chkEstoySeguro.Name = "chkEstoySeguro"
-        Me.chkEstoySeguro.Size = New System.Drawing.Size(108, 20)
+        Me.chkEstoySeguro.Size = New System.Drawing.Size(128, 24)
         Me.chkEstoySeguro.TabIndex = 49
         Me.chkEstoySeguro.Text = "Estoy seguro"
         Me.chkEstoySeguro.UseVisualStyleBackColor = True
@@ -147,46 +147,35 @@ Partial Class FrmBackupRestore
         Me.btnRestaurar.BackColor = System.Drawing.Color.Azure
         Me.btnRestaurar.Enabled = False
         Me.btnRestaurar.Font = New System.Drawing.Font("Bahnschrift", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRestaurar.Location = New System.Drawing.Point(444, 410)
+        Me.btnRestaurar.Location = New System.Drawing.Point(500, 512)
         Me.btnRestaurar.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRestaurar.Name = "btnRestaurar"
-        Me.btnRestaurar.Size = New System.Drawing.Size(156, 32)
+        Me.btnRestaurar.Size = New System.Drawing.Size(176, 40)
         Me.btnRestaurar.TabIndex = 50
         Me.btnRestaurar.Text = "Restaurar"
         Me.btnRestaurar.UseVisualStyleBackColor = False
         '
         'txtBackupDestino
         '
-        Me.txtBackupDestino.Location = New System.Drawing.Point(386, 99)
+        Me.txtBackupDestino.Location = New System.Drawing.Point(434, 124)
         Me.txtBackupDestino.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtBackupDestino.Name = "txtBackupDestino"
-        Me.txtBackupDestino.Size = New System.Drawing.Size(271, 22)
+        Me.txtBackupDestino.Size = New System.Drawing.Size(304, 26)
         Me.txtBackupDestino.TabIndex = 52
         '
         'txtBakOrigen
         '
-        Me.txtBakOrigen.Location = New System.Drawing.Point(386, 246)
+        Me.txtBakOrigen.Location = New System.Drawing.Point(434, 323)
         Me.txtBakOrigen.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtBakOrigen.Name = "txtBakOrigen"
-        Me.txtBakOrigen.Size = New System.Drawing.Size(271, 22)
+        Me.txtBakOrigen.Size = New System.Drawing.Size(304, 26)
         Me.txtBakOrigen.TabIndex = 53
-        '
-        'lblStatus
-        '
-        Me.lblStatus.AutoSize = True
-        Me.lblStatus.Font = New System.Drawing.Font("Bahnschrift", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.Location = New System.Drawing.Point(218, 486)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(68, 21)
-        Me.lblStatus.TabIndex = 54
-        Me.lblStatus.Text = "Estatus"
         '
         'FrmBackupRestore
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1103, 688)
-        Me.Controls.Add(Me.lblStatus)
+        Me.ClientSize = New System.Drawing.Size(1178, 578)
         Me.Controls.Add(Me.txtBakOrigen)
         Me.Controls.Add(Me.txtBackupDestino)
         Me.Controls.Add(Me.btnRestaurar)
@@ -200,7 +189,9 @@ Partial Class FrmBackupRestore
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblNombre)
+        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "FrmBackupRestore"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Mantenimiento de PadeLink"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -220,5 +211,4 @@ Partial Class FrmBackupRestore
     Friend WithEvents btnRestaurar As Button
     Friend WithEvents txtBackupDestino As TextBox
     Friend WithEvents txtBakOrigen As TextBox
-    Friend WithEvents lblStatus As Label
 End Class

@@ -91,6 +91,12 @@
     <Compile Include="FrmBackupRestore.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBienvenida.Designer.vb">
+      <DependentUpon>frmBienvenida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBienvenida.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmReportes.Designer.vb">
       <DependentUpon>frmReportes.vb</DependentUpon>
     </Compile>
@@ -228,6 +234,9 @@
     <EmbeddedResource Include="FrmBackupRestore.resx">
       <DependentUpon>FrmBackupRestore.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBienvenida.resx">
+      <DependentUpon>frmBienvenida.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEditarUsuario.resx">
       <DependentUpon>frmEditarUsuario.vb</DependentUpon>
     </EmbeddedResource>
@@ -328,6 +337,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cerrarsesion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10365581.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2965314.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1828407.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

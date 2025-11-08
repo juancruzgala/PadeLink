@@ -35,7 +35,65 @@ Public Class editar_pareja
         cboEstadoPago.DropDownStyle = ComboBoxStyle.DropDownList
 
         CargarDatosParejaYEstado()
+        CentrarControles()
     End Sub
+
+    ' --- CENTRADO Y ADAPTABILIDAD MEJORADO ---
+    Private Sub editar_pareja_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        Try
+            CentrarControles()
+        Catch
+        End Try
+    End Sub
+
+    Private Sub CentrarControles()
+        ' === Referencias base ===
+        Dim centroX As Integer = Me.ClientSize.Width \ 2
+        Dim topBase As Integer = Panel1.Bottom + 50
+
+        ' === Calcular anchura total de una fila (nombre + DNI) ===
+        Dim espacioEntreCampos As Integer = 80
+        Dim anchoTotal As Integer = txtJugador1.Width + txtDni1.Width + espacioEntreCampos
+        Dim inicioX As Integer = centroX - (anchoTotal \ 2)
+
+        ' === Primera fila ===
+        lblNombre.Left = inicioX - lblNombre.Width - 10
+        lblNombre.Top = topBase + 4
+
+        txtJugador1.Left = inicioX
+        txtJugador1.Top = topBase
+
+        txtDni1.Left = txtJugador1.Right + espacioEntreCampos
+        txtDni1.Top = topBase
+
+        ' === Segunda fila ===
+        txtJugador2.Left = inicioX
+        txtJugador2.Top = txtJugador1.Bottom + 15
+
+        txtDni2.Left = txtJugador2.Right + espacioEntreCampos
+        txtDni2.Top = txtDni1.Bottom + 15
+
+        ' === Seña / Pago ===
+        Label3.Left = centroX - ((Label3.Width + cboEstadoPago.Width + 10) \ 2)
+        Label3.Top = txtJugador2.Bottom + 40
+        cboEstadoPago.Left = Label3.Right + 10
+        cboEstadoPago.Top = Label3.Top - 2
+
+        ' === Botones ===
+        Dim anchoBotones As Integer = btnGuardar.Width + 30 + btnCancelar.Width
+        Dim inicioBotonX As Integer = centroX - (anchoBotones \ 2)
+
+        btnGuardar.Left = inicioBotonX
+        btnGuardar.Top = cboEstadoPago.Bottom + 50
+
+        btnCancelar.Left = btnGuardar.Right + 30
+        btnCancelar.Top = btnGuardar.Top
+
+        ' === Botón Volver ===
+        btnVolver.Left = centroX - (btnVolver.Width \ 2)
+        btnVolver.Top = btnGuardar.Bottom + 45
+    End Sub
+
 
     ' Trae jugadores + estado actual de Inscripcion
     Private Sub CargarDatosParejaYEstado()

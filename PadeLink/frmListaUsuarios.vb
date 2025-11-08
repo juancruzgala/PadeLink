@@ -91,13 +91,13 @@ Public Class frmListaUsuarios
     End Sub
 
     Private Sub btnCrearUsuario_Click(sender As Object, e As EventArgs) Handles btnCrearUsuario.Click
-        Dim f As New frmNuevoUsuario()
-        f.ShowDialog()
-        CargarUsuarios()
+
+        FrmShell.ShowInShell(New frmNuevoUsuario())
     End Sub
+
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
+        FrmShell.ShowInShell(New frmBienvenida())
     End Sub
-
 End Class

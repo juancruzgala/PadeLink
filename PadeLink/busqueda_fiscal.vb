@@ -6,21 +6,87 @@ Imports System.Windows.Forms
 Public Class busqueda_fiscal
 
     Private Sub busqueda_fiscal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Búsqueda (Fiscal)"
+        ' --- Configuración base ---
+        Me.Text = "Búsqueda de Jugadores - PadelLink"
+        Me.BackColor = Color.WhiteSmoke
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.Dock = DockStyle.Fill
+        Me.AutoScroll = True
         Me.Font = New Font("Bahnschrift", 10.0F, FontStyle.Regular)
 
+        ' --- Estilo de títulos ---
+        Label1.Text = "📋 BUSQUEDA"
+        Label1.Font = New Font("Bahnschrift SemiBold", 18)
+        Label1.ForeColor = Color.FromArgb(33, 47, 61)
+        Label1.TextAlign = ContentAlignment.MiddleCenter
+        Label1.Dock = DockStyle.Bottom
+
+        Label4.Text = "➕ AGREGAR"
+        Label4.Font = New Font("Bahnschrift SemiBold", 18)
+        Label4.ForeColor = Color.FromArgb(33, 47, 61)
+        Label4.TextAlign = ContentAlignment.MiddleCenter
+
+        ' --- Estilo botones ---
+        btnBuscar.BackColor = Color.FromArgb(52, 152, 219)    ' azul
+        btnBuscar.ForeColor = Color.White
+        btnBuscar.Font = New Font("Bahnschrift SemiBold", 11)
+        btnBuscar.FlatStyle = FlatStyle.Flat
+        btnBuscar.FlatAppearance.BorderSize = 0
+        btnBuscar.Height = 30
+        btnBuscar.Width = 130
+
+        btnAgregarJugador.BackColor = Color.FromArgb(46, 204, 113)   ' verde
+        btnAgregarJugador.ForeColor = Color.White
+        btnAgregarJugador.Font = New Font("Bahnschrift SemiBold", 11)
+        btnAgregarJugador.FlatStyle = FlatStyle.Flat
+        btnAgregarJugador.FlatAppearance.BorderSize = 0
+        btnAgregarJugador.Height = 30
+        btnAgregarJugador.Width = 130
+
+        ' --- DataGridView elegante ---
+        dgvResultados.BackgroundColor = Color.White
+        dgvResultados.BorderStyle = BorderStyle.None
+        dgvResultados.EnableHeadersVisualStyles = False
+        dgvResultados.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185)
+        dgvResultados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
+        dgvResultados.ColumnHeadersDefaultCellStyle.Font = New Font("Bahnschrift SemiBold", 11)
+        dgvResultados.DefaultCellStyle.BackColor = Color.WhiteSmoke
+        dgvResultados.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 214, 241)
+        dgvResultados.DefaultCellStyle.SelectionForeColor = Color.Black
+        dgvResultados.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(242, 243, 244)
+        dgvResultados.RowHeadersVisible = False
+
+        ' --- Panel principal ---
+        TableLayoutPanel1.Dock = DockStyle.Fill
+        TableLayoutPanel1.BackColor = Color.Transparent
+        TableLayoutPanel1.Padding = New Padding(40, 20, 40, 20)
+        TableLayoutPanel1.AutoScroll = True
+        TableLayoutPanel1.RowStyles.Clear()
+        TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 40)) ' búsqueda
+        TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 40)) ' agregar
+        TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 20)) ' resultados
+
+        ' --- Ajustes de paneles secundarios ---
+        TableLayoutPanel2.Dock = DockStyle.Fill
+        TableLayoutPanel3.Dock = DockStyle.Fill
+        FlowLayoutPanel1.Anchor = AnchorStyles.None
+        FlowLayoutPanel2.Anchor = AnchorStyles.None
+
+        ' --- Comportamiento ---
         cboTorneo.DropDownStyle = ComboBoxStyle.DropDownList
         txtDni.MaxLength = 9
         txtNuevoDni.MaxLength = 9
 
         CargarTorneos()
         CargarCategorias()
+
         dgvResultados.AutoGenerateColumns = True
         dgvResultados.AllowUserToAddRows = False
         dgvResultados.ReadOnly = True
         dgvResultados.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvResultados.MultiSelect = False
     End Sub
+
 
     Private Sub CargarTorneos()
         Dim dt = RepositorioFiscal.ObtenerTorneos()
@@ -130,5 +196,7 @@ Public Class busqueda_fiscal
         End If
     End Sub
 
+    Private Sub dgvResultados_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvResultados.CellContentClick
 
+    End Sub
 End Class

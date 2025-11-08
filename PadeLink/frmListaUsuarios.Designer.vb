@@ -41,6 +41,8 @@ Partial Class frmListaUsuarios
         Me.ContraseñaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EstadoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UsuariosBindingSource3 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.pnlBotones = New System.Windows.Forms.FlowLayoutPanel()
         CType(Me.PadeLinkDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PadeLinkDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UsuariosRolesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -50,6 +52,8 @@ Partial Class frmListaUsuarios
         CType(Me.UsuariosBindingSource2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvUsuarios, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UsuariosBindingSource3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.pnlBotones.SuspendLayout()
         Me.SuspendLayout()
         '
         'PadeLinkDataSetBindingSource
@@ -65,12 +69,14 @@ Partial Class frmListaUsuarios
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS Reference Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(529, 131)
+        Me.Label1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(3, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(278, 35)
+        Me.Label1.Size = New System.Drawing.Size(1319, 132)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Lista de Usuarios"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'UsuariosRolesBindingSource
         '
@@ -102,23 +108,31 @@ Partial Class frmListaUsuarios
         '
         'btnCrearUsuario
         '
-        Me.btnCrearUsuario.Location = New System.Drawing.Point(109, 654)
-        Me.btnCrearUsuario.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnCrearUsuario.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCrearUsuario.AutoSize = True
+        Me.btnCrearUsuario.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.btnCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCrearUsuario.Location = New System.Drawing.Point(243, 20)
+        Me.btnCrearUsuario.Margin = New System.Windows.Forms.Padding(20, 10, 20, 10)
         Me.btnCrearUsuario.Name = "btnCrearUsuario"
         Me.btnCrearUsuario.Size = New System.Drawing.Size(173, 49)
         Me.btnCrearUsuario.TabIndex = 5
         Me.btnCrearUsuario.Text = "Crear Usuario"
-        Me.btnCrearUsuario.UseVisualStyleBackColor = True
+        Me.btnCrearUsuario.UseVisualStyleBackColor = False
         '
         'btnSalir
         '
-        Me.btnSalir.Location = New System.Drawing.Point(1044, 654)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.btnSalir.AutoSize = True
+        Me.btnSalir.BackColor = System.Drawing.Color.MistyRose
+        Me.btnSalir.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.Location = New System.Drawing.Point(40, 20)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(20, 10, 20, 10)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(163, 54)
         Me.btnSalir.TabIndex = 6
         Me.btnSalir.Text = "Salir"
-        Me.btnSalir.UseVisualStyleBackColor = True
+        Me.btnSalir.UseVisualStyleBackColor = False
         '
         'UsuariosBindingSource2
         '
@@ -128,15 +142,18 @@ Partial Class frmListaUsuarios
         'dgvUsuarios
         '
         Me.dgvUsuarios.AutoGenerateColumns = False
+        Me.dgvUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvUsuarios.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUsuarios.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdusuarioDataGridViewTextBoxColumn, Me.NombreusuarioDataGridViewTextBoxColumn, Me.ContraseñaDataGridViewTextBoxColumn, Me.EstadoDataGridViewTextBoxColumn})
         Me.dgvUsuarios.DataSource = Me.UsuariosBindingSource3
-        Me.dgvUsuarios.Location = New System.Drawing.Point(71, 188)
+        Me.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dgvUsuarios.Location = New System.Drawing.Point(3, 136)
         Me.dgvUsuarios.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.dgvUsuarios.Name = "dgvUsuarios"
         Me.dgvUsuarios.RowHeadersWidth = 51
         Me.dgvUsuarios.RowTemplate.Height = 24
-        Me.dgvUsuarios.Size = New System.Drawing.Size(1171, 461)
+        Me.dgvUsuarios.Size = New System.Drawing.Size(1319, 608)
         Me.dgvUsuarios.TabIndex = 7
         '
         'IdusuarioDataGridViewTextBoxColumn
@@ -146,7 +163,6 @@ Partial Class frmListaUsuarios
         Me.IdusuarioDataGridViewTextBoxColumn.MinimumWidth = 8
         Me.IdusuarioDataGridViewTextBoxColumn.Name = "IdusuarioDataGridViewTextBoxColumn"
         Me.IdusuarioDataGridViewTextBoxColumn.ReadOnly = True
-        Me.IdusuarioDataGridViewTextBoxColumn.Width = 150
         '
         'NombreusuarioDataGridViewTextBoxColumn
         '
@@ -154,7 +170,6 @@ Partial Class frmListaUsuarios
         Me.NombreusuarioDataGridViewTextBoxColumn.HeaderText = "nombre_usuario"
         Me.NombreusuarioDataGridViewTextBoxColumn.MinimumWidth = 8
         Me.NombreusuarioDataGridViewTextBoxColumn.Name = "NombreusuarioDataGridViewTextBoxColumn"
-        Me.NombreusuarioDataGridViewTextBoxColumn.Width = 150
         '
         'ContraseñaDataGridViewTextBoxColumn
         '
@@ -162,7 +177,6 @@ Partial Class frmListaUsuarios
         Me.ContraseñaDataGridViewTextBoxColumn.HeaderText = "contraseña"
         Me.ContraseñaDataGridViewTextBoxColumn.MinimumWidth = 8
         Me.ContraseñaDataGridViewTextBoxColumn.Name = "ContraseñaDataGridViewTextBoxColumn"
-        Me.ContraseñaDataGridViewTextBoxColumn.Width = 150
         '
         'EstadoDataGridViewTextBoxColumn
         '
@@ -170,22 +184,49 @@ Partial Class frmListaUsuarios
         Me.EstadoDataGridViewTextBoxColumn.HeaderText = "estado"
         Me.EstadoDataGridViewTextBoxColumn.MinimumWidth = 8
         Me.EstadoDataGridViewTextBoxColumn.Name = "EstadoDataGridViewTextBoxColumn"
-        Me.EstadoDataGridViewTextBoxColumn.Width = 150
         '
         'UsuariosBindingSource3
         '
         Me.UsuariosBindingSource3.DataMember = "Usuarios"
         Me.UsuariosBindingSource3.DataSource = Me.PadeLinkDataSetBindingSource
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.dgvUsuarios, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.pnlBotones, 0, 2)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 3
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1325, 881)
+        Me.TableLayoutPanel1.TabIndex = 8
+        '
+        'pnlBotones
+        '
+        Me.pnlBotones.Controls.Add(Me.btnSalir)
+        Me.pnlBotones.Controls.Add(Me.btnCrearUsuario)
+        Me.pnlBotones.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlBotones.Location = New System.Drawing.Point(3, 751)
+        Me.pnlBotones.Name = "pnlBotones"
+        Me.pnlBotones.Padding = New System.Windows.Forms.Padding(20, 10, 20, 10)
+        Me.pnlBotones.Size = New System.Drawing.Size(1319, 127)
+        Me.pnlBotones.TabIndex = 4
+        Me.pnlBotones.WrapContents = False
+        '
         'frmListaUsuarios
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1325, 881)
-        Me.Controls.Add(Me.dgvUsuarios)
-        Me.Controls.Add(Me.btnSalir)
-        Me.Controls.Add(Me.btnCrearUsuario)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "frmListaUsuarios"
         Me.Text = "Lista de Usuarios"
@@ -198,8 +239,11 @@ Partial Class frmListaUsuarios
         CType(Me.UsuariosBindingSource2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvUsuarios, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UsuariosBindingSource3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
+        Me.pnlBotones.ResumeLayout(False)
+        Me.pnlBotones.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PadeLinkDataSetBindingSource As BindingSource
@@ -220,4 +264,6 @@ Partial Class frmListaUsuarios
     Friend WithEvents NombreusuarioDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ContraseñaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents EstadoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents pnlBotones As FlowLayoutPanel
 End Class

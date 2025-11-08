@@ -19,6 +19,7 @@ Partial Class FrmShell
 
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmShell))
         Me.pnlHost = New System.Windows.Forms.Panel()
         Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.tsbDrop = New System.Windows.Forms.ToolStripButton()
@@ -29,6 +30,7 @@ Partial Class FrmShell
         Me.tsbReportes = New System.Windows.Forms.ToolStripButton()
         Me.tsbBusqueda = New System.Windows.Forms.ToolStripButton()
         Me.tsbBackup = New System.Windows.Forms.ToolStripButton()
+        Me.tsbResultados = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -39,7 +41,7 @@ Partial Class FrmShell
         Me.pnlHost.Location = New System.Drawing.Point(0, 0)
         Me.pnlHost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlHost.Name = "pnlHost"
-        Me.pnlHost.Size = New System.Drawing.Size(1322, 756)
+        Me.pnlHost.Size = New System.Drawing.Size(1175, 605)
         Me.pnlHost.TabIndex = 0
         '
         'ToolStrip2
@@ -47,12 +49,12 @@ Partial Class FrmShell
         Me.ToolStrip2.AutoSize = False
         Me.ToolStrip2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ToolStrip2.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbDrop, Me.tsbTorneos, Me.tsbEditar, Me.tsbNuevo, Me.tsbLogout, Me.tsbReportes, Me.tsbBusqueda, Me.tsbBackup})
+        Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbDrop, Me.tsbTorneos, Me.tsbEditar, Me.tsbNuevo, Me.tsbLogout, Me.tsbReportes, Me.tsbBusqueda, Me.tsbBackup, Me.tsbResultados})
         Me.ToolStrip2.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ToolStrip2.Size = New System.Drawing.Size(1322, 48)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1175, 38)
         Me.ToolStrip2.TabIndex = 3
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -61,7 +63,7 @@ Partial Class FrmShell
         Me.tsbDrop.Image = Global.PadeLink.My.Resources.Resources.drop
         Me.tsbDrop.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDrop.Name = "tsbDrop"
-        Me.tsbDrop.Size = New System.Drawing.Size(81, 43)
+        Me.tsbDrop.Size = New System.Drawing.Size(71, 35)
         Me.tsbDrop.Text = "Drop"
         '
         'tsbTorneos
@@ -69,7 +71,7 @@ Partial Class FrmShell
         Me.tsbTorneos.Image = Global.PadeLink.My.Resources.Resources.listatorneos
         Me.tsbTorneos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbTorneos.Name = "tsbTorneos"
-        Me.tsbTorneos.Size = New System.Drawing.Size(102, 43)
+        Me.tsbTorneos.Size = New System.Drawing.Size(89, 35)
         Me.tsbTorneos.Text = "Torneos"
         '
         'tsbEditar
@@ -78,7 +80,7 @@ Partial Class FrmShell
         Me.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbEditar.Name = "tsbEditar"
-        Me.tsbEditar.Size = New System.Drawing.Size(85, 44)
+        Me.tsbEditar.Size = New System.Drawing.Size(76, 34)
         Me.tsbEditar.Text = "Editar"
         '
         'tsbNuevo
@@ -87,7 +89,7 @@ Partial Class FrmShell
         Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(92, 44)
+        Me.tsbNuevo.Size = New System.Drawing.Size(80, 34)
         Me.tsbNuevo.Text = "Nuevo"
         '
         'tsbLogout
@@ -95,7 +97,7 @@ Partial Class FrmShell
         Me.tsbLogout.Image = Global.PadeLink.My.Resources.Resources._1828407
         Me.tsbLogout.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbLogout.Name = "tsbLogout"
-        Me.tsbLogout.Size = New System.Drawing.Size(144, 43)
+        Me.tsbLogout.Size = New System.Drawing.Size(124, 35)
         Me.tsbLogout.Text = "Cerrar Sesion"
         '
         'tsbReportes
@@ -103,7 +105,7 @@ Partial Class FrmShell
         Me.tsbReportes.Image = Global.PadeLink.My.Resources.Resources.listatorneos
         Me.tsbReportes.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbReportes.Name = "tsbReportes"
-        Me.tsbReportes.Size = New System.Drawing.Size(110, 43)
+        Me.tsbReportes.Size = New System.Drawing.Size(96, 35)
         Me.tsbReportes.Text = "Reportes"
         '
         'tsbBusqueda
@@ -111,7 +113,7 @@ Partial Class FrmShell
         Me.tsbBusqueda.Image = Global.PadeLink.My.Resources.Resources._2965314
         Me.tsbBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBusqueda.Name = "tsbBusqueda"
-        Me.tsbBusqueda.Size = New System.Drawing.Size(118, 43)
+        Me.tsbBusqueda.Size = New System.Drawing.Size(102, 35)
         Me.tsbBusqueda.Text = "Busqueda"
         '
         'tsbBackup
@@ -119,14 +121,22 @@ Partial Class FrmShell
         Me.tsbBackup.Image = Global.PadeLink.My.Resources.Resources._10365581
         Me.tsbBackup.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBackup.Name = "tsbBackup"
-        Me.tsbBackup.Size = New System.Drawing.Size(160, 43)
+        Me.tsbBackup.Size = New System.Drawing.Size(138, 35)
         Me.tsbBackup.Text = "Mantenimiento"
+        '
+        'tsbResultados
+        '
+        Me.tsbResultados.Image = CType(resources.GetObject("tsbResultados.Image"), System.Drawing.Image)
+        Me.tsbResultados.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbResultados.Name = "tsbResultados"
+        Me.tsbResultados.Size = New System.Drawing.Size(109, 35)
+        Me.tsbResultados.Text = "Resultados"
         '
         'FrmShell
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1322, 756)
+        Me.ClientSize = New System.Drawing.Size(1175, 605)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlHost)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -148,4 +158,5 @@ Partial Class FrmShell
     Friend WithEvents tsbReportes As ToolStripButton
     Friend WithEvents tsbBusqueda As ToolStripButton
     Friend WithEvents tsbBackup As ToolStripButton
+    Friend WithEvents tsbResultados As ToolStripButton
 End Class

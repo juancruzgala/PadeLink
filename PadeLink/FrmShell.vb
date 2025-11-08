@@ -149,8 +149,9 @@ Public Class FrmShell
         Try : tsbBusqueda.Image = My.Resources._2965314 : Catch : End Try
         Try : tsbBackup.Image = My.Resources._10365581 : Catch : End Try
         Try : tsbReportes.Image = My.Resources.listatorneos : Catch : End Try
+        Try : tsbResultados.Image = My.Resources.drop : Catch : End Try
 
-        For Each b As ToolStripButton In New ToolStripButton() {tsbNuevo, tsbEditar, tsbBackup, tsbTorneos, tsbDrop, tsbLogout, tsbBusqueda, tsbReportes}
+        For Each b As ToolStripButton In New ToolStripButton() {tsbResultados, tsbNuevo, tsbEditar, tsbBackup, tsbTorneos, tsbDrop, tsbLogout, tsbBusqueda, tsbReportes}
             If b Is Nothing Then Continue For
             b.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             b.TextImageRelation = TextImageRelation.ImageBeforeText
@@ -180,6 +181,11 @@ Public Class FrmShell
     ' ==============================
     ' BOTONES TOOLSTRIP
     ' ==============================
+
+    Private Sub tsbResultados_Click(sender As Object, e As EventArgs) Handles tsbResultados.Click
+        ShowForm(New frmRegistrarResultadoPartido())
+    End Sub
+
     Private Sub tsbBusqueda_Click(sender As Object, e As EventArgs) Handles tsbBusqueda.Click
         ShowForm(New busqueda_fiscal())
     End Sub
@@ -215,7 +221,7 @@ Public Class FrmShell
             MessageBox.Show("Aún no se han creado torneos.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Exit Sub
         End If
-        ShowForm(New lista_torneos() With {.Modo = ModoLista.GenerarDrop})
+        ShowForm(New FrmFixture)
     End Sub
 
     Private Sub tsbReportes_Click(sender As Object, e As EventArgs) Handles tsbReportes.Click
@@ -245,6 +251,7 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = True
                 tsbBackup.Visible = False
+                tsbResultados.Visible = True
 
             ElseIf String.Equals(role, "Canchero", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = True
@@ -255,6 +262,7 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = False
                 tsbBackup.Visible = False
+                tsbResultados.Visible = True
 
             ElseIf String.Equals(role, "Administrador", StringComparison.OrdinalIgnoreCase) Then
                 tsbNuevo.Visible = False
@@ -265,7 +273,7 @@ Public Class FrmShell
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = False
                 tsbBackup.Visible = True
-                
+                tsbResultados.Visible = False
             End If
 
         Catch
@@ -277,6 +285,7 @@ Public Class FrmShell
             tsbReportes.Visible = True
             tsbBusqueda.Visible = True
             tsbBackup.Visible = True
+            tsbResultados.Visible = True
         End Try
     End Sub
 

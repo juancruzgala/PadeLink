@@ -48,6 +48,12 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -97,6 +103,18 @@
     <Compile Include="frmBienvenida.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmFixture.Designer.vb">
+      <DependentUpon>frmFixture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFixture.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistrarResultadoPartido.Designer.vb">
+      <DependentUpon>frmRegistrarResultadoPartido.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistrarResultadoPartido.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmReportes.Designer.vb">
       <DependentUpon>frmReportes.vb</DependentUpon>
     </Compile>
@@ -104,6 +122,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RepositorioFiscal.vb" />
+    <Compile Include="RepositorioFixture.vb" />
+    <Compile Include="RepositorioPartidos.Designer.vb">
+      <DependentUpon>RepositorioPartidos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPartidos.vb" />
     <Compile Include="RepositorioReportes.vb" />
     <Compile Include="RepositorioZonas.vb" />
     <Compile Include="Torneo.vb" />
@@ -240,6 +263,9 @@
     <EmbeddedResource Include="frmEditarUsuario.resx">
       <DependentUpon>frmEditarUsuario.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmFixture.resx">
+      <DependentUpon>frmFixture.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +274,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNuevoUsuario.resx">
       <DependentUpon>frmNuevoUsuario.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistrarResultadoPartido.resx">
+      <DependentUpon>frmRegistrarResultadoPartido.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportes.resx">
       <DependentUpon>frmReportes.vb</DependentUpon>
@@ -279,6 +308,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="PadeLinkDataSet.xsc">
       <DependentUpon>PadeLinkDataSet.xsd</DependentUpon>
     </None>

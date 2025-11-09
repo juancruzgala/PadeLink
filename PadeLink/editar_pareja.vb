@@ -16,86 +16,179 @@ Public Class editar_pareja
         _pareja = p
     End Sub
 
+    ' === FORM LOAD ===
     Private Sub editar_pareja_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Editar Pareja"
+        Me.BackColor = Color.FromArgb(243, 245, 249)
         Me.Font = New Font("Bahnschrift", 10.0F, FontStyle.Regular)
+        Me.MinimumSize = New Size(900, 600)
 
-        lblTitulo.Text = "Editar Pareja"
-        lblTitulo.Font = New Font("Bahnschrift", 14.0F, FontStyle.Bold)
-        lblTitulo.TextAlign = ContentAlignment.MiddleCenter
-        lblTitulo.Dock = DockStyle.Top
-        lblTitulo.Height = 40
+        ' === PANEL CABECERA ===
+        Panel1.Dock = DockStyle.Top
+        Panel1.Height = 120
+        Panel1.BackColor = Color.FromArgb(54, 88, 138) ' Azul elegante
+        Panel1.BorderStyle = BorderStyle.None
 
-        If txtDni1 IsNot Nothing Then txtDni1.MaxLength = 9
-        If txtDni2 IsNot Nothing Then txtDni2.MaxLength = 9
+        Label4.Dock = DockStyle.Fill
+        Label4.Font = New Font("Bahnschrift SemiBold", 22, FontStyle.Bold)
+        Label4.TextAlign = ContentAlignment.MiddleCenter
+        Label4.ForeColor = Color.White
+        Label4.Text = "✎  Modificar Pareja  ✎ "
+        Label4.Padding = New Padding(0, 8, 0, 0)
 
-        ' Opciones fijas (deben coincidir con el CHECK de la BD)
+        ' === LÍNEA DECORATIVA BAJO PANEL ===
+        Dim lineaDecorativa As New Panel With {
+        .Height = 3,
+        .Dock = DockStyle.Top,
+        .BackColor = Color.FromArgb(220, 230, 245)
+    }
+        Me.Controls.Add(lineaDecorativa)
+        lineaDecorativa.BringToFront()
+
+        ' === COMBO ESTADO ===
+        cboEstadoPago.DropDownStyle = ComboBoxStyle.DropDownList
         cboEstadoPago.Items.Clear()
         cboEstadoPago.Items.AddRange(New Object() {"No pago", "Seña", "Pago Total"})
-        cboEstadoPago.DropDownStyle = ComboBoxStyle.DropDownList
+        cboEstadoPago.BackColor = Color.White
+        cboEstadoPago.FlatStyle = FlatStyle.Flat
 
+        ' === CAMPOS DE TEXTO ===
+        For Each tb As TextBox In {txtJugador1, txtJugador2, txtDni1, txtDni2}
+            tb.BorderStyle = BorderStyle.FixedSingle
+            tb.BackColor = Color.White
+            tb.ForeColor = Color.FromArgb(30, 30, 30)
+            tb.Font = New Font("Bahnschrift", 10.5!, FontStyle.Regular)
+        Next
+
+        txtDni1.MaxLength = 9
+        txtDni2.MaxLength = 9
+
+        ' === BOTONES ===
+        Dim colorPrincipal As Color = Color.FromArgb(54, 88, 138)
+        Dim colorHover As Color = Color.FromArgb(80, 120, 180)
+
+        For Each b As Button In {btnGuardar, btnCancelar}
+            b.FlatStyle = FlatStyle.Flat
+            b.FlatAppearance.BorderSize = 0
+            b.Font = New Font("Bahnschrift", 10, FontStyle.Bold)
+            b.Size = New Size(150, 40)
+            b.BackColor = Color.White
+            b.ForeColor = colorPrincipal
+            b.Cursor = Cursors.Hand
+            b.Region = Nothing ' eliminamos región personalizada para evitar errores
+        Next
+
+        ' === EFECTO HOVER ===
+        AddHandler btnGuardar.MouseEnter, Sub()
+                                              btnGuardar.BackColor = colorPrincipal
+                                              btnGuardar.ForeColor = Color.White
+                                          End Sub
+        AddHandler btnGuardar.MouseLeave, Sub()
+                                              btnGuardar.BackColor = Color.White
+                                              btnGuardar.ForeColor = colorPrincipal
+                                          End Sub
+
+        AddHandler btnCancelar.MouseEnter, Sub()
+                                               btnCancelar.BackColor = colorHover
+                                               btnCancelar.ForeColor = Color.White
+                                           End Sub
+        AddHandler btnCancelar.MouseLeave, Sub()
+                                               btnCancelar.BackColor = Color.White
+                                               btnCancelar.ForeColor = colorPrincipal
+                                           End Sub
+
+
+        ' === ETIQUETAS ===
+        For Each lbl As Label In {lblNombre, Label3, Label5}
+            lbl.Font = New Font("Bahnschrift SemiBold", 10.5!, FontStyle.Regular)
+            lbl.ForeColor = Color.FromArgb(50, 50, 70)
+        Next
+
+        ' === PANEL FONDO DE EDICIÓN ===
+        Dim fondoEdicion As New Panel With {
+        .BackColor = Color.White,
+        .BorderStyle = BorderStyle.None,
+        .Size = New Size(Me.ClientSize.Width - 200, 300),
+        .Top = Panel1.Bottom + 40,
+        .Left = 100
+    }
+        fondoEdicion.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right
+
+        ' Sombra visual (efecto elevación)
+        Dim sombra As New Panel With {
+        .BackColor = Color.FromArgb(220, 225, 235),
+        .Size = fondoEdicion.Size,
+        .Top = fondoEdicion.Top + 4,
+        .Left = fondoEdicion.Left + 4
+    }
+        sombra.Anchor = fondoEdicion.Anchor
+        Me.Controls.Add(sombra)
+        Me.Controls.Add(fondoEdicion)
+        fondoEdicion.BringToFront()
+
+        sombra.SendToBack()
+        fondoEdicion.SendToBack()
+
+        ' === CARGAR DATOS Y CENTRAR ===
         CargarDatosParejaYEstado()
         CentrarControles()
     End Sub
 
-    ' --- CENTRADO Y ADAPTABILIDAD MEJORADO ---
+
+    ' === ADAPTABILIDAD ===
     Private Sub editar_pareja_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-        Try
-            CentrarControles()
-        Catch
-        End Try
+        CentrarControles()
     End Sub
 
     Private Sub CentrarControles()
-        ' === Referencias base ===
+        ' === Calcular referencias base ===
         Dim centroX As Integer = Me.ClientSize.Width \ 2
-        Dim topBase As Integer = Panel1.Bottom + 50
-
-        ' === Calcular anchura total de una fila (nombre + DNI) ===
+        Dim margenSuperior As Integer = Panel1.Bottom + (Me.ClientSize.Height * 0.1)
         Dim espacioEntreCampos As Integer = 80
+
+        ' === Panel encabezado ===
+        Panel1.Width = Me.ClientSize.Width
+
+        ' === Ancho total de campos nombre + DNI ===
         Dim anchoTotal As Integer = txtJugador1.Width + txtDni1.Width + espacioEntreCampos
         Dim inicioX As Integer = centroX - (anchoTotal \ 2)
 
-        ' === Primera fila ===
+        ' === Fila 1 (nombre + dni jugador 1) ===
         lblNombre.Left = inicioX - lblNombre.Width - 10
-        lblNombre.Top = topBase + 4
+        lblNombre.Top = margenSuperior + ((txtJugador1.Height - lblNombre.Height) \ 2)
 
         txtJugador1.Left = inicioX
-        txtJugador1.Top = topBase
-
+        txtJugador1.Top = margenSuperior
         txtDni1.Left = txtJugador1.Right + espacioEntreCampos
-        txtDni1.Top = topBase
+        txtDni1.Top = margenSuperior
 
-        ' === Segunda fila ===
+        ' === Label DNIs alineado con el textbox de la derecha ===
+        Label5.Top = lblNombre.Top
+        Label5.Left = txtDni1.Left - (Label5.Width + 10)
+
+        ' === Fila 2 (nombre + dni jugador 2) ===
         txtJugador2.Left = inicioX
-        txtJugador2.Top = txtJugador1.Bottom + 15
-
+        txtJugador2.Top = txtJugador1.Bottom + 20
         txtDni2.Left = txtJugador2.Right + espacioEntreCampos
-        txtDni2.Top = txtDni1.Bottom + 15
+        txtDni2.Top = txtDni1.Bottom + 20
 
-        ' === Seña / Pago ===
+        ' === Seña/Pago ===
         Label3.Left = centroX - ((Label3.Width + cboEstadoPago.Width + 10) \ 2)
-        Label3.Top = txtJugador2.Bottom + 40
+        Label3.Top = txtJugador2.Bottom + 50
         cboEstadoPago.Left = Label3.Right + 10
         cboEstadoPago.Top = Label3.Top - 2
 
-        ' === Botones ===
-        Dim anchoBotones As Integer = btnGuardar.Width + 30 + btnCancelar.Width
+        ' === Botones principales ===
+        Dim anchoBotones As Integer = btnGuardar.Width + 40 + btnCancelar.Width
         Dim inicioBotonX As Integer = centroX - (anchoBotones \ 2)
-
         btnGuardar.Left = inicioBotonX
-        btnGuardar.Top = cboEstadoPago.Bottom + 50
-
-        btnCancelar.Left = btnGuardar.Right + 30
+        btnCancelar.Left = btnGuardar.Right + 40
+        btnGuardar.Top = cboEstadoPago.Bottom + 60
         btnCancelar.Top = btnGuardar.Top
-
-        ' === Botón Volver ===
-        btnVolver.Left = centroX - (btnVolver.Width \ 2)
-        btnVolver.Top = btnGuardar.Bottom + 45
     End Sub
 
 
-    ' Trae jugadores + estado actual de Inscripcion
+    ' === CARGA DE DATOS ===
     Private Sub CargarDatosParejaYEstado()
         Const sql As String =
 "SELECT  p.id_jugador1, j1.nombre AS n1, j1.dni AS d1,
@@ -121,7 +214,6 @@ Public Class editar_pareja
                     txtDni2.Text = rd("d2").ToString()
 
                     Dim estado As String = If(rd("estado") Is DBNull.Value, "No pago", rd("estado").ToString())
-                    ' Seleccionar en el combo; si por algún motivo viene diferente, default a "No pago"
                     Dim idx = cboEstadoPago.FindStringExact(estado)
                     cboEstadoPago.SelectedIndex = If(idx >= 0, idx, 0)
                 End If
@@ -129,78 +221,39 @@ Public Class editar_pareja
         End Using
     End Sub
 
-    ' Solo números en DNI
-    Private Sub txtDni_KeyPress(sender As Object, e As KeyPressEventArgs) _
-        Handles txtDni1.KeyPress, txtDni2.KeyPress
-        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
-            e.Handled = True
-        End If
-    End Sub
-
+    ' === VALIDACIONES Y GUARDADO ===
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
-        ' --- Validaciones UI ---
         Dim n1 = txtJugador1.Text.Trim()
         Dim n2 = txtJugador2.Text.Trim()
         Dim d1 = txtDni1.Text.Trim()
         Dim d2 = txtDni2.Text.Trim()
         Dim estadoSel As String = If(cboEstadoPago.SelectedItem Is Nothing, "No pago", cboEstadoPago.SelectedItem.ToString())
 
+        ' Validaciones simples
         If String.IsNullOrWhiteSpace(n1) OrElse String.IsNullOrWhiteSpace(n2) Then
-            MessageBox.Show("Completá los nombres de ambos jugadores.", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Completá los nombres de ambos jugadores.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
         If String.IsNullOrWhiteSpace(d1) OrElse String.IsNullOrWhiteSpace(d2) Then
-            MessageBox.Show("El DNI de ambos jugadores es obligatorio.", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        Dim re As New System.Text.RegularExpressions.Regex("^\d{7,9}$")
-        If Not re.IsMatch(d1) Then
-            MessageBox.Show("DNI del Jugador 1 inválido (7 a 9 dígitos).", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-        If Not re.IsMatch(d2) Then
-            MessageBox.Show("DNI del Jugador 2 inválido (7 a 9 dígitos).", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("El DNI de ambos jugadores es obligatorio.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
         If d1 = d2 Then
-            MessageBox.Show("Los DNIs no pueden ser iguales (no es la misma persona).", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Los DNIs no pueden ser iguales.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        ' Validar estado con los 3 permitidos
-        If Not (estadoSel = "No pago" OrElse estadoSel = "Seña" OrElse estadoSel = "Pago Total") Then
-            MessageBox.Show("Estado inválido. Debe ser: No pago / Seña / Pago Total.", "Validación",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
-        End If
-
-        ' --- Guardar en BD (transacción) ---
+        ' Actualización
         Const sql As String =
 "BEGIN TRY
     BEGIN TRAN;
-
-    UPDATE dbo.Jugador
-       SET nombre = @n1, dni = @d1
-     WHERE id_jugador = @idj1;
-
-    UPDATE dbo.Jugador
-       SET nombre = @n2, dni = @d2
-     WHERE id_jugador = @idj2;
-
-    UPDATE dbo.Inscripcion
-       SET estado_validacion = @estado
-     WHERE id_torneo = @idTorneo AND id_pareja = @idPareja;
-
+    UPDATE dbo.Jugador SET nombre=@n1, dni=@d1 WHERE id_jugador=@idj1;
+    UPDATE dbo.Jugador SET nombre=@n2, dni=@d2 WHERE id_jugador=@idj2;
+    UPDATE dbo.Inscripcion SET estado_validacion=@estado WHERE id_torneo=@idTorneo AND id_pareja=@idPareja;
     COMMIT TRAN;
 END TRY
 BEGIN CATCH
-    IF @@TRANCOUNT > 0 ROLLBACK TRAN;
+    IF @@TRANCOUNT>0 ROLLBACK TRAN;
     THROW;
 END CATCH;"
 
@@ -219,27 +272,25 @@ END CATCH;"
                 cmd.ExecuteNonQuery()
             End Using
 
-            ' refrescar objeto para el caller
             _pareja.Jugador1 = n1
             _pareja.Jugador2 = n2
             _pareja.SeniaOPago = estadoSel
-
-            MessageBox.Show("Pareja actualizada correctamente.", "Éxito",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Pareja actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
             DialogResult = DialogResult.OK
             Me.Close()
 
-        Catch ex As SqlException When ex.Number = 2627 OrElse ex.Number = 2601
-            MessageBox.Show("Ese DNI ya está registrado para otro jugador. Verificá los DNIs.",
-                            "DNI duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         Catch ex As Exception
-            MessageBox.Show("Error al guardar los cambios." & Environment.NewLine & ex.Message,
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error al guardar los cambios: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
+    Private Sub txtDni_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDni1.KeyPress, txtDni2.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+    End Sub
+
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        DialogResult = DialogResult.Cancel
+
+        FrmShell.ShowInShell(New lista_inscriptos(_torneo))
         Me.Close()
     End Sub
 

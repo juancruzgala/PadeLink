@@ -26,8 +26,10 @@ Partial Class frmBienvenida
         Me.ClientSize = New System.Drawing.Size(1178, 544)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmBienvenida"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Pantalla de Bienvenida"
         Me.ResumeLayout(False)
+
     End Sub
 
 End Class

@@ -4,9 +4,12 @@ Imports System.Data.SqlClient
 Public Module RepositorioReportes
 
     ' ===================== AJUSTES RÁPIDOS (si tu esquema difiere) =====================
-    Private Const PRICE_COL_PRIMARY As String = "monto"               ' nombre de columna principal de precio
-    Private Const PRICE_COL_FALLBACK As String = "precio_inscripcion" ' alternativa si no existe "monto"
+    ' ===================== AJUSTES RÁPIDOS =====================
+    Private ReadOnly PRICE_CANDIDATES As String() =
+    {"monto", "monto_inscripcion", "precio_inscripcion", "precio", "monto_torneo"}
     Private Const ESTADO_PARTIDO_FINALIZADO As String = "Finalizado"
+    ' ===========================================================
+
     ' ===================================================================================
 
     ' Devuelve el nombre de columna de precio que existe en Torneos (monto o precio_inscripcion)
@@ -19,10 +22,24 @@ Public Module RepositorioReportes
                           THEN @p2
                      ELSE @p1
                    END", cn)
-            cmd.Parameters.AddWithValue("@p1", PRICE_COL_PRIMARY)
-            cmd.Parameters.AddWithValue("@p2", PRICE_COL_FALLBACK)
+            cmd.Parameters.AddWithValue("@p1", PRICE_CANDIDATES)
+            cmd.Parameters.AddWithValue("@p2", PRICE_CANDIDATES)
             Return CStr(cmd.ExecuteScalar())
         End Using
+    End Function
+    Private Function TorneosColumnExists(cn As SqlConnection, col As String) As Boolean
+        Using cmd As New SqlCommand("SELECT CASE WHEN COL_LENGTH('dbo.Torneos', @c) IS NOT NULL THEN 1 ELSE 0 END", cn)
+            cmd.Parameters.AddWithValue("@c", col)
+            Return CInt(cmd.ExecuteScalar()) = 1
+        End Using
+    End Function
+
+    Private Function DetectPrecioColumn(cn As SqlConnection) As String
+        For Each c In PRICE_CANDIDATES
+            If TorneosColumnExists(cn, c) Then Return c
+        Next
+        ' último recurso: devolvemos “monto” y que sea 0 si no existe
+        Return "monto"
     End Function
 
     ' -------------------------- ADMIN: Recaudación por torneo (rango fechas) --------------------------
@@ -30,7 +47,7 @@ Public Module RepositorioReportes
         Dim dt As New DataTable()
         Using cn = Conexion.GetConnection()
             cn.Open()
-            Dim priceCol As String = PrecioColumna(cn)
+            Dim priceCol As String = DetectPrecioColumn(cn)   ' <- ahora detecta bien
 
             Dim sql As String =
 $"
@@ -39,34 +56,35 @@ $"
         t.id_torneo,
         t.nombre_torneo,
         t.fecha,
-        ISNULL(t.{priceCol}, 0) AS precio,
+        CAST(ISNULL(t.{priceCol}, 0) AS DECIMAL(18,2)) AS precio,
         i.estado_validacion
     FROM dbo.Torneos t
     LEFT JOIN dbo.Inscripcion i ON i.id_torneo = t.id_torneo
     WHERE t.fecha BETWEEN @d1 AND @d2
-      AND EXISTS (
-          SELECT 1
-          FROM dbo.Inscripcion i2
-          WHERE i2.id_torneo = t.id_torneo
-            AND i2.estado_validacion IN ('Pago Total','Seña')
-      )
 )
 SELECT 
     nombre_torneo AS Torneo,
     CONVERT(date, fecha) AS Fecha,
     COUNT(CASE WHEN estado_validacion IS NOT NULL THEN 1 END) AS ParejasInscriptas,
-    ISNULL(SUM(CASE 
-                  WHEN estado_validacion = 'Pago Total' THEN precio
-                  WHEN estado_validacion = 'Seña' THEN precio * 0.5
-                  ELSE 0 
-               END), 0) AS Monto,
+
+    CAST(
+        ISNULL(SUM(
+            CASE 
+                WHEN estado_validacion = 'Pago Total' THEN precio
+                WHEN estado_validacion = 'Seña'       THEN precio * 0.5
+                ELSE 0 
+            END
+        ), 0) AS DECIMAL(18,2)
+    ) AS Monto,
+
     SUM(CASE WHEN estado_validacion = 'Pago Total' THEN 1 ELSE 0 END) AS CantPagoTotal,
-    SUM(CASE WHEN estado_validacion = 'Seña' THEN 1 ELSE 0 END) AS CantSeña,
-    SUM(CASE WHEN estado_validacion = 'No pago' THEN 1 ELSE 0 END) AS CantNoPago
+    SUM(CASE WHEN estado_validacion = 'Seña'       THEN 1 ELSE 0 END) AS CantSeña,
+    SUM(CASE WHEN estado_validacion = 'No pago'    THEN 1 ELSE 0 END) AS CantNoPago
 FROM base
 GROUP BY nombre_torneo, fecha
 ORDER BY Fecha DESC, Torneo ASC;
 "
+
 
             Using cmd As New SqlCommand(sql, cn)
                 cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = desde.Date
@@ -78,6 +96,7 @@ ORDER BY Fecha DESC, Torneo ASC;
         End Using
         Return dt
     End Function
+
 
 
     ' -------------------------- CANCHERO: “Calendario” (próximos y últimos) --------------------------

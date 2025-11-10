@@ -196,9 +196,19 @@ Public Class FrmReportes
     Private Sub CargarFiscal()
         Dim dt = RepositorioReportes.Fiscal_Avance()
         dgv.DataSource = dt
+
         FormatearColumnaSiExiste("Fecha", "d")
         FormatearColumnaSiExiste("Porcentaje", "N2")
 
+        ' === Ocultar columnas que no querés mostrar ===
+        If dgv.Columns.Contains("PartidosJugados") Then
+            dgv.Columns("PartidosJugados").Visible = False
+        End If
+        If dgv.Columns.Contains("Porcentaje") Then
+            dgv.Columns("Porcentaje").Visible = False
+        End If
+
+        ' Colorear filas según avance
         If dt.Columns.Contains("Porcentaje") Then
             For Each gr As DataGridViewRow In dgv.Rows
                 Dim p As Decimal = 0
@@ -210,8 +220,10 @@ Public Class FrmReportes
                 End If
             Next
         End If
+
         lblTotal.Text = $"Torneos activos: {dt.Rows.Count}"
     End Sub
+
 
 
     Private Sub FormatearColumnaSiExiste(nombreCol As String, formato As String)

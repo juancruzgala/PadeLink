@@ -174,6 +174,106 @@ Public Class agregar_jugadores
         btnListaInscriptos.Top = btnAgregar.Bottom + 60
         btnVolver.Top = btnListaInscriptos.Top
     End Sub
+    ' === Validación de dígitos en DNI ===
+    Private Sub txtDni_KeyPress(sender As Object, e As KeyPressEventArgs) _
+    Handles txtDni1.KeyPress, txtDni2.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    ' === Click en Agregar ===
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        ' 1) Lectura
+        Dim n1 As String = txtJugador1.Text.Trim()
+        Dim n2 As String = txtJugador2.Text.Trim()
+        Dim d1 As String = txtDni1.Text.Trim()
+        Dim d2 As String = txtDni2.Text.Trim()
+        Dim estadoUI As String = If(cboSeniaPago.SelectedItem, "").ToString()
+
+        ' 2) Validaciones básicas
+        If String.IsNullOrWhiteSpace(n1) OrElse String.IsNullOrWhiteSpace(n2) Then
+            MessageBox.Show("Completá el nombre de ambos jugadores.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        If String.IsNullOrWhiteSpace(d1) OrElse String.IsNullOrWhiteSpace(d2) Then
+            MessageBox.Show("Ambos DNI son obligatorios.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        If d1 = d2 Then
+            MessageBox.Show("Los DNI no pueden ser iguales.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim re As New System.Text.RegularExpressions.Regex("^\d{7,9}$")
+        If Not re.IsMatch(d1) Then
+            MessageBox.Show("DNI del Jugador 1 inválido (7 a 9 dígitos).", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+        If Not re.IsMatch(d2) Then
+            MessageBox.Show("DNI del Jugador 2 inválido (7 a 9 dígitos).", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        If String.IsNullOrWhiteSpace(estadoUI) Then
+            MessageBox.Show("Seleccioná un estado de pago.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' 3) Normalizar estado EXACTO a lo que acepta la BD/constraint
+        '    (usa: 'No pago', 'Seña', 'Pago Total')
+        Dim estadoBD As String
+        Select Case estadoUI.Trim().ToUpperInvariant()
+            Case "PENDIENTE" : estadoBD = "No pago"
+            Case "SEÑA", "SENA" : estadoBD = "Seña"
+            Case "PAGO TOTAL" : estadoBD = "Pago Total"
+            Case Else : estadoBD = "No pago"
+        End Select
+
+        ' 4) Insertar usando tu repositorio (crea jugadores si no existen,
+        '    crea pareja si no existe e inscribe en el torneo si no estaba)
+        Try
+            RepositorioParejas.AgregarBD(_torneo, n1, n2, estadoBD, d1, d2)
+
+            MessageBox.Show("¡Pareja inscripta correctamente!", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            ' Limpiar UI
+            txtJugador1.Clear() : txtJugador2.Clear()
+            txtDni1.Clear() : txtDni2.Clear()
+            If cboSeniaPago.Items.Count > 0 Then cboSeniaPago.SelectedIndex = 0
+            txtJugador1.Focus()
+
+            ' (Opcional) Si la lista está abierta, podrías refrescarla:
+            'For Each f As Form In Application.OpenForms
+            '    If TypeOf f Is lista_inscriptos Then
+            '        Try : DirectCast(f, lista_inscriptos).Refrescar() : Catch : End Try
+            '        Exit For
+            '    End If
+            'Next
+
+        Catch ex As SqlException
+            ' Claves únicas en DNI (2601/2627)
+            If ex.Number = 2627 OrElse ex.Number = 2601 Then
+                MessageBox.Show("DNI duplicado. Verificá que los jugadores no existan ya con ese DNI.",
+                            "DNI único", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Else
+                MessageBox.Show("No se pudo inscribir la pareja." & Environment.NewLine & ex.Message,
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MessageBox.Show("No se pudo inscribir la pareja." & Environment.NewLine & ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
 
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
         FrmShell.ShowInShell(New lista_torneos())

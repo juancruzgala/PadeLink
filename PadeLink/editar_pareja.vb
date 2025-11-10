@@ -282,6 +282,7 @@ END CATCH;"
         Catch ex As Exception
             MessageBox.Show("Error al guardar los cambios: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+        FrmShell.ShowInShell(New lista_inscriptos(_torneo))
     End Sub
 
     Private Sub txtDni_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDni1.KeyPress, txtDni2.KeyPress

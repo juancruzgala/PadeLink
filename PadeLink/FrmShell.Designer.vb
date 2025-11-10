@@ -41,7 +41,7 @@ Partial Class FrmShell
         Me.pnlHost.Location = New System.Drawing.Point(0, 0)
         Me.pnlHost.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pnlHost.Name = "pnlHost"
-        Me.pnlHost.Size = New System.Drawing.Size(1175, 605)
+        Me.pnlHost.Size = New System.Drawing.Size(1322, 756)
         Me.pnlHost.TabIndex = 0
         '
         'ToolStrip2
@@ -54,7 +54,7 @@ Partial Class FrmShell
         Me.ToolStrip2.Name = "ToolStrip2"
         Me.ToolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ToolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.ToolStrip2.Size = New System.Drawing.Size(1175, 38)
+        Me.ToolStrip2.Size = New System.Drawing.Size(1322, 48)
         Me.ToolStrip2.TabIndex = 3
         Me.ToolStrip2.Text = "ToolStrip2"
         '
@@ -63,7 +63,7 @@ Partial Class FrmShell
         Me.tsbDrop.Image = Global.PadeLink.My.Resources.Resources.drop
         Me.tsbDrop.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbDrop.Name = "tsbDrop"
-        Me.tsbDrop.Size = New System.Drawing.Size(71, 35)
+        Me.tsbDrop.Size = New System.Drawing.Size(81, 43)
         Me.tsbDrop.Text = "Drop"
         '
         'tsbTorneos
@@ -71,7 +71,7 @@ Partial Class FrmShell
         Me.tsbTorneos.Image = Global.PadeLink.My.Resources.Resources.listatorneos
         Me.tsbTorneos.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbTorneos.Name = "tsbTorneos"
-        Me.tsbTorneos.Size = New System.Drawing.Size(89, 35)
+        Me.tsbTorneos.Size = New System.Drawing.Size(102, 43)
         Me.tsbTorneos.Text = "Torneos"
         '
         'tsbEditar
@@ -80,7 +80,7 @@ Partial Class FrmShell
         Me.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbEditar.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbEditar.Name = "tsbEditar"
-        Me.tsbEditar.Size = New System.Drawing.Size(76, 34)
+        Me.tsbEditar.Size = New System.Drawing.Size(85, 44)
         Me.tsbEditar.Text = "Editar"
         '
         'tsbNuevo
@@ -89,7 +89,7 @@ Partial Class FrmShell
         Me.tsbNuevo.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbNuevo.Margin = New System.Windows.Forms.Padding(2)
         Me.tsbNuevo.Name = "tsbNuevo"
-        Me.tsbNuevo.Size = New System.Drawing.Size(80, 34)
+        Me.tsbNuevo.Size = New System.Drawing.Size(92, 44)
         Me.tsbNuevo.Text = "Nuevo"
         '
         'tsbLogout
@@ -97,7 +97,7 @@ Partial Class FrmShell
         Me.tsbLogout.Image = Global.PadeLink.My.Resources.Resources._1828407
         Me.tsbLogout.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbLogout.Name = "tsbLogout"
-        Me.tsbLogout.Size = New System.Drawing.Size(124, 35)
+        Me.tsbLogout.Size = New System.Drawing.Size(144, 43)
         Me.tsbLogout.Text = "Cerrar Sesion"
         '
         'tsbReportes
@@ -105,7 +105,7 @@ Partial Class FrmShell
         Me.tsbReportes.Image = Global.PadeLink.My.Resources.Resources.listatorneos
         Me.tsbReportes.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbReportes.Name = "tsbReportes"
-        Me.tsbReportes.Size = New System.Drawing.Size(96, 35)
+        Me.tsbReportes.Size = New System.Drawing.Size(110, 43)
         Me.tsbReportes.Text = "Reportes"
         '
         'tsbBusqueda
@@ -113,15 +113,15 @@ Partial Class FrmShell
         Me.tsbBusqueda.Image = Global.PadeLink.My.Resources.Resources._2965314
         Me.tsbBusqueda.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBusqueda.Name = "tsbBusqueda"
-        Me.tsbBusqueda.Size = New System.Drawing.Size(102, 35)
+        Me.tsbBusqueda.Size = New System.Drawing.Size(118, 43)
         Me.tsbBusqueda.Text = "Busqueda"
         '
         'tsbBackup
         '
-        Me.tsbBackup.Image = Global.PadeLink.My.Resources.Resources._10365581
+        Me.tsbBackup.Image = CType(resources.GetObject("tsbBackup.Image"), System.Drawing.Image)
         Me.tsbBackup.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbBackup.Name = "tsbBackup"
-        Me.tsbBackup.Size = New System.Drawing.Size(138, 35)
+        Me.tsbBackup.Size = New System.Drawing.Size(160, 43)
         Me.tsbBackup.Text = "Mantenimiento"
         '
         'tsbResultados
@@ -129,14 +129,14 @@ Partial Class FrmShell
         Me.tsbResultados.Image = CType(resources.GetObject("tsbResultados.Image"), System.Drawing.Image)
         Me.tsbResultados.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbResultados.Name = "tsbResultados"
-        Me.tsbResultados.Size = New System.Drawing.Size(109, 35)
+        Me.tsbResultados.Size = New System.Drawing.Size(126, 43)
         Me.tsbResultados.Text = "Resultados"
         '
         'FrmShell
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1175, 605)
+        Me.ClientSize = New System.Drawing.Size(1322, 756)
         Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.pnlHost)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)

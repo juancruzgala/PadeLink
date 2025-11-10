@@ -137,13 +137,6 @@
     <Compile Include="crear_torneo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DropGenerator.vb" />
-    <Compile Include="drop_torneo.Designer.vb">
-      <DependentUpon>drop_torneo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="drop_torneo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="editar_pareja.Designer.vb">
       <DependentUpon>editar_pareja.vb</DependentUpon>
     </Compile>
@@ -244,9 +237,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="crear_torneo.resx">
       <DependentUpon>crear_torneo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="drop_torneo.resx">
-      <DependentUpon>drop_torneo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editar_pareja.resx">
       <DependentUpon>editar_pareja.vb</DependentUpon>
@@ -376,6 +366,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1828407.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mant.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -46,7 +46,7 @@ Public Class crear_torneo
 
         ' ===== TÍTULO =====
         lblTitulo = New Label With {
-            .Text = "🏆 Nuevo Torneo",
+            .Text = "🏆 Nuevo Torneo 🏆",
             .Dock = DockStyle.Fill,
             .Font = New Font("Bahnschrift SemiBold", 18.0F),
             .TextAlign = ContentAlignment.MiddleCenter,
@@ -323,8 +323,102 @@ Public Class crear_torneo
     End Sub
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs)
-        MessageBox.Show("✅ Torneo creado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' === VALIDACIONES BÁSICAS ===
+        If String.IsNullOrWhiteSpace(txtNombre.Text) Then
+            MessageBox.Show("Debe ingresar un nombre para el torneo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtNombre.Focus()
+            Return
+        End If
+
+        If cboFiscal.SelectedIndex < 0 Then
+            MessageBox.Show("Debe seleccionar un fiscal.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            cboFiscal.Focus()
+            Return
+        End If
+
+        If dtpHasta.Value.Date < dtpDesde.Value.Date Then
+            MessageBox.Show("La fecha 'Hasta' no puede ser menor que la fecha 'Desde'.", "Error de fecha", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            dtpHasta.Focus()
+            Return
+        End If
+
+        ' === VALIDACIÓN DE GRILLA ===
+        If dgvDatos.Rows.Count = 0 Then
+            MessageBox.Show("Debe cargar al menos una categoría antes de crear el torneo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        ' Confirmación
+        If MessageBox.Show("¿Desea crear este torneo con las categorías indicadas?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.No Then
+            Return
+        End If
+
+        Try
+            Using cn = Conexion.GetConnection()
+                cn.Open()
+
+                ' === INSERTAR UNA FILA POR CADA CATEGORÍA ===
+                For Each fila As DataGridViewRow In dgvDatos.Rows
+                    If fila.IsNewRow Then Continue For
+
+                    Dim idCategoria As Object = fila.Cells("Categoria").Value
+                    Dim maxParejas As Object = fila.Cells("MaximoParejas").Value
+                    Dim precio As Object = fila.Cells("PrecioInscripcion").Value
+
+                    ' --- Validaciones ---
+                    If idCategoria Is Nothing OrElse String.IsNullOrEmpty(idCategoria.ToString()) Then
+                        MessageBox.Show("Hay una fila sin categoría seleccionada.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+
+                    If maxParejas Is Nothing OrElse Not IsNumeric(maxParejas) Then
+                        MessageBox.Show("Hay una fila sin cantidad máxima de parejas válida.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+
+                    If precio Is Nothing OrElse Not IsNumeric(precio) Then
+                        MessageBox.Show("Hay una fila sin precio de inscripción válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+
+                    ' --- INSERT EN TABLA TORNEOS ---
+                    Dim sql As String = "
+                    INSERT INTO Torneos 
+                    (nombre_torneo, id_categoria, id_fiscal, hora_inicio, fecha, fecha_hasta, max_parejas, precio_inscripcion, id_canchero, monto_inscripcion)
+                    VALUES 
+                    (@nombre, @categoria, @fiscal, @hora, @desde, @hasta, @max, @precio, @canchero, @monto);"
+
+                    Using cmd As New SqlCommand(sql, cn)
+                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim())
+                        cmd.Parameters.AddWithValue("@categoria", idCategoria)
+                        cmd.Parameters.AddWithValue("@fiscal", CInt(cboFiscal.SelectedValue))
+                        cmd.Parameters.AddWithValue("@hora", dtpHoraInicio.Value.TimeOfDay)
+                        cmd.Parameters.AddWithValue("@desde", dtpDesde.Value.Date)
+                        cmd.Parameters.AddWithValue("@hasta", dtpHasta.Value.Date)
+                        cmd.Parameters.AddWithValue("@max", CInt(maxParejas))
+                        cmd.Parameters.AddWithValue("@precio", CDec(precio))
+                        ' ⚠️ Si todavía no manejás cancheros, poné un valor por defecto (ej: 1)
+                        cmd.Parameters.AddWithValue("@canchero", 1)
+                        ' ⚠️ monto_inscripcion puede ser igual al precio si no tenés otro valor
+                        cmd.Parameters.AddWithValue("@monto", CDec(precio))
+
+                        cmd.ExecuteNonQuery()
+                    End Using
+                Next
+
+                MessageBox.Show("✅ Torneo creado correctamente con todas sus categorías.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtNombre.Clear()
+                cboFiscal.SelectedIndex = -1
+                dgvDatos.Rows.Clear()
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("❌ Error al guardar el torneo: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
+
+
+
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs)
         FrmShell.ShowInShell(New frmBienvenida())

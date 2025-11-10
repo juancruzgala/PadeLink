@@ -6,7 +6,8 @@ Public Class FrmBackupRestore
 
     Private Const NOMBRE_BD As String = "PadeLink"
     Private Const FRASE_CONFIRMACION As String = "RESTAURAR PadeLink"
-    Private lblStatus As Object
+    Private lblStatus As Label
+
 
     Private Sub FrmBackupRestore_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -212,6 +213,52 @@ Public Class FrmBackupRestore
         Me.Controls.Add(layout)
         layout.Dock = DockStyle.Fill
         layout.BringToFront()
+
+        ' ===== BOTÓN VOLVER =====
+        Dim btnVolver As New Button With {
+            .Text = "Volver",
+            .Size = New Size(120, 40),
+            .BackColor = Color.FromArgb(52, 73, 94),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Bahnschrift", 10.0F, FontStyle.Bold),
+            .Anchor = AnchorStyles.Bottom Or AnchorStyles.Right,
+            .Location = New Point(Me.ClientSize.Width - 140, Me.ClientSize.Height - 80)
+        }
+        btnVolver.FlatAppearance.BorderSize = 0
+
+        ' --- Acción al hacer clic ---
+        AddHandler btnVolver.Click,
+            Sub()
+                ' Si estás usando navegación con el shell principal:
+                FrmShell.ShowInShell(New frmBienvenida())
+
+                ' Si quisieras abrirlo de forma independiente:
+                'Dim f As New frmBienvenida()
+                'f.Show()
+                'Me.Close()
+            End Sub
+
+        ' --- Agregar el botón al formulario ---
+        Me.Controls.Add(btnVolver)
+        btnVolver.BringToFront()
+
+        ' ===== LABEL STATUS =====
+        lblStatus = New Label With {
+            .AutoSize = False,
+            .Text = "",
+            .Font = New Font("Bahnschrift", 10.0F, FontStyle.Italic),
+            .ForeColor = Color.FromArgb(60, 60, 60),
+            .BackColor = Color.FromArgb(245, 247, 250),
+            .TextAlign = ContentAlignment.MiddleLeft,
+            .Dock = DockStyle.Bottom,
+            .Height = 35,
+            .Padding = New Padding(20, 0, 0, 0)
+        }
+
+        ' Agregamos el label al final del formulario, justo encima del botón Volver
+        Me.Controls.Add(lblStatus)
+        lblStatus.BringToFront()
 
     End Sub
 

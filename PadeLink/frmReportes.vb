@@ -98,7 +98,6 @@ Public Class FrmReportes
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Me.Close()
         End Select
-
         ' ===== ORDEN FINAL DE CONTROLES =====
         Me.Controls.Clear()
         Me.Controls.Add(pnlContenedorGrid)
@@ -106,8 +105,31 @@ Public Class FrmReportes
         If pnlFiltros IsNot Nothing Then Me.Controls.Add(pnlFiltros)
         Me.Controls.Add(lblTitulo)
 
+        ' ===== BOTÓN VOLVER (DEBE IR DESPUÉS DE AGREGAR LOS DEMÁS CONTROLES) =====
+        Dim btnVolver As New Button With {
+            .Text = "Volver",
+            .Size = New Size(120, 30),
+            .BackColor = Color.FromArgb(52, 73, 94),
+            .ForeColor = Color.White,
+            .FlatStyle = FlatStyle.Flat,
+            .Font = New Font("Bahnschrift", 10.0F, FontStyle.Bold),
+            .Anchor = AnchorStyles.Bottom Or AnchorStyles.Left,
+            .Location = New Point(20, Me.ClientSize.Height - 60)
+        }
+
+        btnVolver.FlatAppearance.BorderSize = 0
+
+        AddHandler btnVolver.Click,
+    Sub()
+        FrmShell.ShowInShell(New frmBienvenida())
+    End Sub
+
+        Me.Controls.Add(btnVolver)
+        btnVolver.BringToFront()
+
         Me.ResumeLayout()
         Me.PerformLayout()
+
     End Sub
 
 
@@ -148,13 +170,13 @@ Public Class FrmReportes
     Private Sub CargarAdmin()
         Dim dt = RepositorioReportes.Admin_Recaudacion(dtDesde.Value, dtHasta.Value)
         dgv.DataSource = dt
-        FormatearColumnaSiExiste("Recaudado", "C2")
+        FormatearColumnaSiExiste("Monto", "C2")
         FormatearColumnaSiExiste("Fecha", "d")
 
         Dim total As Decimal = 0D
-        If dt.Columns.Contains("Recaudado") Then
+        If dt.Columns.Contains("Monto") Then
             For Each r As DataRow In dt.Rows
-                If Not IsDBNull(r("Recaudado")) Then total += CDec(r("Recaudado"))
+                If Not IsDBNull(r("Monto")) Then total += CDec(r("Monto"))
             Next
         End If
         lblTotal.Text = $"Total recaudado en rango: {total:C2}"
@@ -201,5 +223,6 @@ Public Class FrmReportes
                    DataGridViewContentAlignment.MiddleLeft)
         End If
     End Sub
+
 
 End Class

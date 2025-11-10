@@ -44,21 +44,29 @@ $"
     FROM dbo.Torneos t
     LEFT JOIN dbo.Inscripcion i ON i.id_torneo = t.id_torneo
     WHERE t.fecha BETWEEN @d1 AND @d2
-      AND (t.estado = 'Finalizado' OR t.estado = 'FINALIZADO' OR t.estado = 'Finalizado ') -- por si hay variantes
+      AND EXISTS (
+          SELECT 1
+          FROM dbo.Inscripcion i2
+          WHERE i2.id_torneo = t.id_torneo
+            AND i2.estado_validacion IN ('Pago Total','Seña')
+      )
 )
 SELECT 
-    nombre_torneo      AS Torneo,
+    nombre_torneo AS Torneo,
     CONVERT(date, fecha) AS Fecha,
     COUNT(CASE WHEN estado_validacion IS NOT NULL THEN 1 END) AS ParejasInscriptas,
-    SUM(CASE WHEN estado_validacion = 'Pago Total' THEN precio
-             WHEN estado_validacion = 'Seña' THEN precio * 0.5
-             ELSE 0 END)                                 AS Recaudado,
+    ISNULL(SUM(CASE 
+                  WHEN estado_validacion = 'Pago Total' THEN precio
+                  WHEN estado_validacion = 'Seña' THEN precio * 0.5
+                  ELSE 0 
+               END), 0) AS Monto,
     SUM(CASE WHEN estado_validacion = 'Pago Total' THEN 1 ELSE 0 END) AS CantPagoTotal,
-    SUM(CASE WHEN estado_validacion = 'Seña'       THEN 1 ELSE 0 END) AS CantSeña,
-    SUM(CASE WHEN estado_validacion = 'No pago'    THEN 1 ELSE 0 END) AS CantNoPago
+    SUM(CASE WHEN estado_validacion = 'Seña' THEN 1 ELSE 0 END) AS CantSeña,
+    SUM(CASE WHEN estado_validacion = 'No pago' THEN 1 ELSE 0 END) AS CantNoPago
 FROM base
 GROUP BY nombre_torneo, fecha
-ORDER BY Fecha DESC, Torneo ASC;"
+ORDER BY Fecha DESC, Torneo ASC;
+"
 
             Using cmd As New SqlCommand(sql, cn)
                 cmd.Parameters.Add("@d1", SqlDbType.DateTime).Value = desde.Date
@@ -71,21 +79,22 @@ ORDER BY Fecha DESC, Torneo ASC;"
         Return dt
     End Function
 
+
     ' -------------------------- CANCHERO: “Calendario” (próximos y últimos) --------------------------
     Public Function Canchero_Calendario(Optional diasAtras As Integer = 7, Optional diasAdelante As Integer = 60) As DataTable
         Dim dt As New DataTable()
         Using cn = Conexion.GetConnection(), cmd As New SqlCommand("
-SELECT 
-    t.nombre_torneo AS Torneo,
-    CONVERT(date, t.fecha) AS Fecha,
-    t.id_categoria,
-    ISNULL(c.nombre_cat, CONCAT('Cat ', t.id_categoria)) AS Categoria,
-    t.estado
-FROM dbo.Torneos t
-LEFT JOIN dbo.Categoria c ON c.id_categoria = t.id_categoria
-WHERE t.fecha BETWEEN DATEADD(day, -@back, CAST(GETDATE() AS date))
-                   AND DATEADD(day,  @fwd,  CAST(GETDATE() AS date))
-ORDER BY t.fecha ASC, t.nombre_torneo ASC;", cn)
+            SELECT 
+                t.nombre_torneo AS Torneo,
+                CONVERT(date, t.fecha) AS Fecha,
+                t.id_categoria,
+                ISNULL(c.nombre_cat, CONCAT('Cat ', t.id_categoria)) AS Categoria,
+                t.estado
+            FROM dbo.Torneos t
+            LEFT JOIN dbo.Categoria c ON c.id_categoria = t.id_categoria
+            WHERE t.fecha BETWEEN DATEADD(day, -@back, CAST(GETDATE() AS date))
+                               AND DATEADD(day,  @fwd,  CAST(GETDATE() AS date))
+            ORDER BY t.fecha ASC, t.nombre_torneo ASC;", cn)
             cmd.Parameters.Add("@back", SqlDbType.Int).Value = diasAtras
             cmd.Parameters.Add("@fwd", SqlDbType.Int).Value = diasAdelante
             cn.Open()

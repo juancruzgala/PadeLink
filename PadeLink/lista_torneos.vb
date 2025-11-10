@@ -6,7 +6,6 @@ Imports System.Data.SqlClient
 Public Enum ModoLista
     EditarTorneo
     GestionJugadores
-    GenerarDrop
     VerInscriptosFiscal
 End Enum
 
@@ -30,8 +29,6 @@ Partial Public Class lista_torneos
         Select Case Modo
             Case ModoLista.EditarTorneo
                 Me.Text = "Lista de torneos (modo: Editar)"
-            Case ModoLista.GenerarDrop
-                Me.Text = "Lista de torneos (modo: Drop)"
             Case ModoLista.VerInscriptosFiscal
                 Me.Text = "Lista de torneos (modo: Fiscal)"
             Case Else
@@ -95,30 +92,64 @@ Partial Public Class lista_torneos
         For Each t In lista
             Dim nombreCat As String = NombreCategoria(t.id_categoria)
 
+            ' --- CONTENEDOR del botón + estado ---
+            Dim panelContenedor As New Panel With {
+        .Width = anchoDisponible,
+        .Height = 100,
+        .BackColor = Color.WhiteSmoke,
+        .Margin = New Padding(10, 8, 10, 8)
+    }
+
+            ' === BOTÓN PRINCIPAL DEL TORNEO ===
             Dim btn As New Button() With {
-                .Width = anchoDisponible,
-                .Height = 80,
-                .Margin = New Padding(10, 8, 10, 8),
-                .Font = New Font("Bahnschrift", 10.0F, FontStyle.Regular),
-                .TextAlign = ContentAlignment.MiddleLeft,
-                .Padding = New Padding(12, 8, 12, 8),
-                .BackColor = Color.WhiteSmoke,
-                .FlatStyle = FlatStyle.Flat,
-                .Tag = t
-            }
+        .Width = anchoDisponible - 10,
+        .Height = 80,
+        .Location = New Point(0, 15),
+        .Font = New Font("Bahnschrift", 10.0F, FontStyle.Regular),
+        .TextAlign = ContentAlignment.MiddleLeft,
+        .Padding = New Padding(12, 8, 12, 8),
+        .BackColor = Color.White,
+        .FlatStyle = FlatStyle.Flat,
+        .Tag = t
+    }
             btn.FlatAppearance.BorderColor = Color.LightGray
             btn.FlatAppearance.BorderSize = 1
 
-            ' hora_inicio en el modelo es DateTime (con Date.Today + TimeSpan), por eso "HH:mm"
             btn.Text =
-                t.nombre_torneo & Environment.NewLine &
-                t.fecha.ToString("dd/MM/yyyy") & " " & t.hora_inicio.ToString("HH:mm") & Environment.NewLine &
-                "Cat: " & nombreCat & "   Parejas: " & t.max_parejas.ToString() & Environment.NewLine &
-                "Inscripción: $" & t.precio_inscripcion.ToString("N0")
+        t.nombre_torneo & Environment.NewLine &
+        t.fecha.ToString("dd/MM/yyyy") & " " & t.hora_inicio.ToString("HH:mm") & Environment.NewLine &
+        "Categoria: " & nombreCat & "   Parejas: " & t.max_parejas.ToString() & Environment.NewLine &
+        "Inscripción: $" & t.precio_inscripcion.ToString("N0")
 
             AddHandler btn.Click, AddressOf BotonTorneo_Click
-            flpTorneos.Controls.Add(btn)
+
+            ' === ETIQUETA DE ESTADO ===
+            Dim lblEstado As New Label()
+            lblEstado.AutoSize = True
+            lblEstado.Font = New Font("Bahnschrift", 10.0F, FontStyle.Regular)
+            lblEstado.Location = New Point(anchoDisponible - 150, -1)
+
+            Select Case t.estado.ToString().Trim().ToLower()
+                Case "finalizado"
+                    lblEstado.Text = "FINALIZADO"
+                    lblEstado.ForeColor = Color.Red
+                Case "en curso"
+                    lblEstado.Text = "EN CURSO"
+                    lblEstado.ForeColor = Color.Green
+                Case "programado"
+                    lblEstado.Text = "PROGRAMADO"
+                    lblEstado.ForeColor = Color.Blue
+                Case Else
+                    lblEstado.Text = t.estado.ToString()
+                    lblEstado.ForeColor = Color.Gray
+            End Select
+
+            ' Agregar al contenedor
+            panelContenedor.Controls.Add(btn)
+            panelContenedor.Controls.Add(lblEstado)
+            flpTorneos.Controls.Add(panelContenedor)
         Next
+
 
         flpTorneos.ResumeLayout()
     End Sub
@@ -137,15 +168,6 @@ Partial Public Class lista_torneos
 
             Case ModoLista.GestionJugadores
                 FrmShell.ShowInShell(New agregar_jugadores(t))
-
-            Case ModoLista.GenerarDrop
-                Dim cant As Integer = RepositorioParejas.Listar(t).Count
-                If cant < 3 Then
-                    MessageBox.Show("Necesitás al menos 3 parejas inscriptas para generar el drop.",
-                                    "Información", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Return
-                End If
-                FrmShell.ShowInShell(New drop_torneo(t))
 
             Case ModoLista.VerInscriptosFiscal
                 FrmShell.ShowInShell(New lista_inscriptos(t))

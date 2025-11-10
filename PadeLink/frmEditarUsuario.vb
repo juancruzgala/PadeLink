@@ -44,7 +44,8 @@ Public Class frmEditarUsuario
 
 
     Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        Me.Close()
+
+        FrmShell.ShowInShell(New frmListaUsuarios())
     End Sub
 
     Private Sub frmEditarUsuario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -60,8 +61,6 @@ Public Class frmEditarUsuario
         btnCancelar.Top = btnGuardar.Top
 
     End Sub
-
-    ' --- Pegar dentro de la clase frmEditarUsuario ---
 
     Private Sub CenterButtons()
         ' margen entre los botones

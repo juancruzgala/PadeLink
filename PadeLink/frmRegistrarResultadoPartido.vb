@@ -27,8 +27,7 @@ Public Class frmRegistrarResultadoPartido
         InitializeComponent()
         _idPartidoPreseleccionado = idPartido
         _idPartido = idPartido
-        lblPareja1.Text = pareja1
-        lblPareja2.Text = pareja2
+        lblEnfrentamiento.Text = $"{pareja1} vs {pareja2}"
         grpCarga.Enabled = True
     End Sub
 
@@ -101,8 +100,7 @@ Public Class frmRegistrarResultadoPartido
         dgvPartidos.DataSource = Nothing
         _idPartido = 0
         grpCarga.Enabled = False
-        lblPareja1.Text = ""
-        lblPareja2.Text = ""
+        lblEnfrentamiento.Text = $"pareja1 vs pareja2"
         cmbGanador.SelectedIndex = -1
 
         If cboTorneo.SelectedValue Is Nothing Then Return
@@ -175,8 +173,7 @@ ORDER BY pt.id_partido;"
         If r Is Nothing Then Return
 
         _idPartido = CInt(r.Cells("id_partido").Value)
-        lblPareja1.Text = r.Cells("Pareja1").Value.ToString()
-        lblPareja2.Text = r.Cells("Pareja2").Value.ToString()
+        lblEnfrentamiento.Text = $"{r.Cells("Pareja1").Value} vs {r.Cells("Pareja2").Value}"
         cmbGanador.SelectedIndex = -1
         grpCarga.Enabled = True
 
@@ -253,8 +250,7 @@ ORDER BY pt.id_partido;"
         grpCarga.Enabled = False
         _idPartido = 0
         cmbGanador.SelectedIndex = -1
-        lblPareja1.Text = ""
-        lblPareja2.Text = ""
+        lblEnfrentamiento.Text = ""
     End Sub
 
     ' ===================== Helpers SQL opcionales =====================

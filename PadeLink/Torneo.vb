@@ -10,6 +10,7 @@ Public Class Torneo
     Public Property id_fiscal As Integer
     Public Property max_parejas As Integer
     Public Property precio_inscripcion As Decimal
+    Public Property estado As String
 
 End Class
 

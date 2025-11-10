@@ -147,7 +147,7 @@ Public Class FrmShell
         Try : tsbDrop.Image = My.Resources.drop : Catch : End Try
         Try : tsbLogout.Image = My.Resources._1828407 : Catch : End Try
         Try : tsbBusqueda.Image = My.Resources._2965314 : Catch : End Try
-        Try : tsbBackup.Image = My.Resources._10365581 : Catch : End Try
+        Try : tsbBackup.Image = My.Resources.mant : Catch : End Try
         Try : tsbReportes.Image = My.Resources.listatorneos : Catch : End Try
         Try : tsbResultados.Image = My.Resources.drop : Catch : End Try
 
@@ -268,7 +268,7 @@ Public Class FrmShell
                 tsbNuevo.Visible = False
                 tsbEditar.Visible = False
                 tsbDrop.Visible = False
-                tsbTorneos.Visible = True
+                tsbTorneos.Visible = False
                 tsbLogout.Visible = True
                 tsbReportes.Visible = True
                 tsbBusqueda.Visible = False

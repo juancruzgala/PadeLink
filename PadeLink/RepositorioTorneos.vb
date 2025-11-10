@@ -37,7 +37,7 @@ Public Module RepositorioTorneos
     Public Function Listar() As List(Of Torneo)
         Const sql As String =
 "SELECT  id_torneo, nombre_torneo, fecha, fecha_hasta, hora_inicio,
-         id_categoria, id_canchero, id_fiscal, max_parejas, precio_inscripcion
+         id_categoria, id_canchero, id_fiscal, max_parejas, precio_inscripcion, estado
    FROM dbo.Torneos
    ORDER BY fecha DESC, nombre_torneo;"
 
@@ -46,7 +46,7 @@ Public Module RepositorioTorneos
             cn.Open()
             Using rd = cmd.ExecuteReader()
                 While rd.Read()
-                    lista.Add(New Torneo With {
+                    Dim t As New Torneo With {
                         .id_torneo = rd.GetInt32(0),
                         .nombre_torneo = rd.GetString(1),
                         .fecha = rd.GetDateTime(2),
@@ -56,8 +56,10 @@ Public Module RepositorioTorneos
                         .id_canchero = rd.GetInt32(6),
                         .id_fiscal = rd.GetInt32(7),
                         .max_parejas = rd.GetInt32(8),
-                        .precio_inscripcion = rd.GetDecimal(9)
-                    })
+                        .precio_inscripcion = rd.GetDecimal(9),
+                        .estado = rd.GetString(10)   ' ✅ Nuevo campo calculado
+                    }
+                    lista.Add(t)
                 End While
             End Using
         End Using
@@ -65,7 +67,7 @@ Public Module RepositorioTorneos
     End Function
 
     '=======================
-    ' LISTAR (DATATABLE)  ⬅️ por compatibilidad
+    ' LISTAR (DATATABLE)
     '=======================
     Public Function ListarDataTable() As DataTable
         Const sql As String =
@@ -78,7 +80,8 @@ Public Module RepositorioTorneos
          T.hora_inicio        AS HoraInicio,
          C.nombre_cat         AS Categoria,
          UC.nombre_usuario    AS Canchero,
-         UF.nombre_usuario    AS Fiscal
+         UF.nombre_usuario    AS Fiscal,
+         T.estado             AS Estado
   FROM dbo.Torneos T
   JOIN dbo.Categoria C ON C.id_categoria = T.id_categoria
   JOIN dbo.Usuarios  UC ON UC.id_usuario = T.id_canchero
@@ -110,7 +113,7 @@ Public Module RepositorioTorneos
     Public Function ObtenerPorId(id As Integer) As Torneo
         Const sql As String =
 "SELECT id_torneo, nombre_torneo, fecha, fecha_hasta, hora_inicio,
-        id_categoria, id_canchero, id_fiscal, max_parejas, precio_inscripcion
+        id_categoria, id_canchero, id_fiscal, max_parejas, precio_inscripcion, estado
   FROM dbo.Torneos WHERE id_torneo=@id;"
 
         Using cn = Conexion.GetConnection(), cmd As New SqlCommand(sql, cn)
@@ -128,7 +131,8 @@ Public Module RepositorioTorneos
                     .id_canchero = rd.GetInt32(6),
                     .id_fiscal = rd.GetInt32(7),
                     .max_parejas = rd.GetInt32(8),
-                    .precio_inscripcion = rd.GetDecimal(9)
+                    .precio_inscripcion = rd.GetDecimal(9),
+                    .estado = rd.GetString(10)   ' ✅ Campo calculado
                 }
             End Using
         End Using

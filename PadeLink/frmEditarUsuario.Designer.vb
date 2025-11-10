@@ -1,9 +1,8 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmEditarUsuario
     Inherits System.Windows.Forms.Form
 
-    'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -14,134 +13,147 @@ Partial Class frmEditarUsuario
         End Try
     End Sub
 
-    'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
 
-    'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
-    'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.txtContrasena = New System.Windows.Forms.TextBox()
-        Me.TxtNombre = New System.Windows.Forms.TextBox()
-        Me.btnGuardar = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.pnlContenido = New System.Windows.Forms.Panel()
         Me.cboRol = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtContrasena = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TxtNombre = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnCancelar = New System.Windows.Forms.Button()
+        Me.btnGuardar = New System.Windows.Forms.Button()
+        Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.pnlContenido.SuspendLayout()
         Me.SuspendLayout()
         '
-        'txtContrasena
-        '
-        Me.txtContrasena.Location = New System.Drawing.Point(277, 210)
-        Me.txtContrasena.Name = "txtContrasena"
-        Me.txtContrasena.Size = New System.Drawing.Size(209, 22)
-        Me.txtContrasena.TabIndex = 0
-        '
-        'TxtNombre
-        '
-        Me.TxtNombre.Location = New System.Drawing.Point(277, 123)
-        Me.TxtNombre.Name = "TxtNombre"
-        Me.TxtNombre.Size = New System.Drawing.Size(198, 22)
-        Me.TxtNombre.TabIndex = 1
-        '
-        'btnGuardar
-        '
-        Me.btnGuardar.Location = New System.Drawing.Point(257, 362)
-        Me.btnGuardar.Name = "btnGuardar"
-        Me.btnGuardar.Size = New System.Drawing.Size(90, 33)
-        Me.btnGuardar.TabIndex = 2
-        Me.btnGuardar.Text = "Guardar"
-        Me.btnGuardar.UseVisualStyleBackColor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("MS Reference Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(290, 29)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(190, 28)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Editar Usuario"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(274, 83)
-        Me.Label2.Name = "Label2"
-        Me.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Label2.Size = New System.Drawing.Size(300, 23)
-        Me.Label2.TabIndex = 5
-        Me.Label2.Text = "nombre de usuario (modificado)"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(274, 165)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(233, 23)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Contraseña (modificada)"
-        '
-        'btnCancelar
-        '
-        Me.btnCancelar.Location = New System.Drawing.Point(387, 362)
-        Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(89, 33)
-        Me.btnCancelar.TabIndex = 7
-        Me.btnCancelar.Text = "Cancelar"
-        Me.btnCancelar.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("MS Reference Sans Serif", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(283, 252)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(159, 23)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Rol (modificado)"
-        '
-        'cboRol
-        '
-        Me.cboRol.FormattingEnabled = True
-        Me.cboRol.Location = New System.Drawing.Point(283, 293)
-        Me.cboRol.Name = "cboRol"
-        Me.cboRol.Size = New System.Drawing.Size(121, 24)
-        Me.cboRol.TabIndex = 9
-        '
-        'frmEditarUsuario
+        '=== FORM ===
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(780, 435)
-        Me.Controls.Add(Me.cboRol)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.btnCancelar)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.btnGuardar)
-        Me.Controls.Add(Me.TxtNombre)
-        Me.Controls.Add(Me.txtContrasena)
+        Me.BackColor = System.Drawing.Color.FromArgb(240, 243, 247)
+        Me.ClientSize = New System.Drawing.Size(800, 500)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmEditarUsuario"
         Me.Text = "Editar Usuario"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.Dock = DockStyle.Fill
+        '
+        '=== TÍTULO ===
+        '
+        Me.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblTitulo.Font = New System.Drawing.Font("Bahnschrift SemiBold", 18.0!)
+        Me.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(40, 40, 40)
+        Me.lblTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.lblTitulo.Height = 100
+        Me.lblTitulo.Padding = New Padding(0, 20, 0, 10)
+        Me.lblTitulo.Text = "🧑‍💼 Editar Usuario 🧑‍💼"
+        '
+        '=== PANEL CONTENEDOR ===
+        '
+        Me.pnlContenido.BackColor = System.Drawing.Color.White
+        Me.pnlContenido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlContenido.Anchor = AnchorStyles.None
+        Me.pnlContenido.Padding = New Padding(40)
+        Me.pnlContenido.Size = New System.Drawing.Size(600, 320)
+        Me.pnlContenido.Location = New System.Drawing.Point(
+            (Me.ClientSize.Width - Me.pnlContenido.Width) \ 2,
+            (Me.ClientSize.Height - Me.pnlContenido.Height) \ 2)
+        Me.pnlContenido.Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Bottom
+        '
+        '=== LABEL NOMBRE ===
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(50, 50, 50)
+        Me.Label2.Location = New System.Drawing.Point(40, 40)
+        Me.Label2.Text = "Nombre de Usuario:"
+        '
+        '=== TXT NOMBRE ===
+        '
+        Me.TxtNombre.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.TxtNombre.Location = New System.Drawing.Point(260, 38)
+        Me.TxtNombre.Size = New System.Drawing.Size(280, 30)
+        '
+        '=== LABEL CONTRASEÑA ===
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(50, 50, 50)
+        Me.Label3.Location = New System.Drawing.Point(40, 100)
+        Me.Label3.Text = "Contraseña:"
+        '
+        '=== TXT CONTRASEÑA ===
+        '
+        Me.txtContrasena.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.txtContrasena.Location = New System.Drawing.Point(260, 98)
+        Me.txtContrasena.Size = New System.Drawing.Size(280, 30)
+        '
+        '=== LABEL ROL ===
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.Label4.ForeColor = System.Drawing.Color.FromArgb(50, 50, 50)
+        Me.Label4.Location = New System.Drawing.Point(40, 160)
+        Me.Label4.Text = "Rol:"
+        '
+        '=== COMBO ROL ===
+        '
+        Me.cboRol.Font = New System.Drawing.Font("Bahnschrift", 11.0!)
+        Me.cboRol.Location = New System.Drawing.Point(260, 158)
+        Me.cboRol.Size = New System.Drawing.Size(200, 30)
+        '
+        '=== BOTÓN GUARDAR ===
+        '
+        Me.btnGuardar.BackColor = System.Drawing.Color.FromArgb(72, 201, 176)
+        Me.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGuardar.FlatAppearance.BorderSize = 0
+        Me.btnGuardar.Font = New System.Drawing.Font("Bahnschrift SemiBold", 10.0!)
+        Me.btnGuardar.ForeColor = System.Drawing.Color.White
+        Me.btnGuardar.Size = New System.Drawing.Size(140, 40)
+        Me.btnGuardar.Text = "Guardar"
+        Me.btnGuardar.UseVisualStyleBackColor = False
+        '
+        '=== BOTÓN CANCELAR ===
+        '
+        Me.btnCancelar.BackColor = System.Drawing.Color.FromArgb(200, 200, 200)
+        Me.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelar.FlatAppearance.BorderSize = 0
+        Me.btnCancelar.Font = New System.Drawing.Font("Bahnschrift SemiBold", 10.0!)
+        Me.btnCancelar.ForeColor = System.Drawing.Color.Black
+        Me.btnCancelar.Size = New System.Drawing.Size(140, 40)
+        Me.btnCancelar.Text = "Cancelar"
+        Me.btnCancelar.UseVisualStyleBackColor = False
+        '
+        '=== ESTRUCTURA FINAL ===
+        '
+        Me.pnlContenido.Controls.Add(Me.Label2)
+        Me.pnlContenido.Controls.Add(Me.TxtNombre)
+        Me.pnlContenido.Controls.Add(Me.Label3)
+        Me.pnlContenido.Controls.Add(Me.txtContrasena)
+        Me.pnlContenido.Controls.Add(Me.Label4)
+        Me.pnlContenido.Controls.Add(Me.cboRol)
+        Me.pnlContenido.Controls.Add(Me.btnGuardar)
+        Me.pnlContenido.Controls.Add(Me.btnCancelar)
 
+        Me.Controls.Add(Me.pnlContenido)
+        Me.Controls.Add(Me.lblTitulo)
+
+        Me.pnlContenido.ResumeLayout(False)
+        Me.pnlContenido.PerformLayout()
+        Me.ResumeLayout(False)
     End Sub
 
-    Friend WithEvents txtContrasena As TextBox
-    Friend WithEvents TxtNombre As TextBox
-    Friend WithEvents btnGuardar As Button
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents btnCancelar As Button
-    Friend WithEvents Label4 As Label
+    Friend WithEvents pnlContenido As Panel
+    Friend WithEvents lblTitulo As Label
     Friend WithEvents cboRol As ComboBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtContrasena As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TxtNombre As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents btnCancelar As Button
+    Friend WithEvents btnGuardar As Button
 End Class

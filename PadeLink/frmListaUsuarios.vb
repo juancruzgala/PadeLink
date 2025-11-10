@@ -25,7 +25,8 @@ Public Class frmListaUsuarios
             dgvUsuarios.Columns.Add(btnEdit)
         End If
 
-        dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+        ' 🔹 Ahora las columnas se expanden para llenar todo el espacio disponible
+        dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
     End Sub
 
@@ -59,7 +60,6 @@ Public Class frmListaUsuarios
     Private Sub dgvUsuarios_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUsuarios.CellContentClick
         If e.RowIndex >= 0 Then
 
-
             Dim id As Integer = CInt(dgvUsuarios.Rows(e.RowIndex).Cells("IdUsuario").Value)
 
             Select Case dgvUsuarios.Columns(e.ColumnIndex).Name
@@ -70,9 +70,10 @@ Public Class frmListaUsuarios
                     Dim nombre As String = dgvUsuarios.Rows(e.RowIndex).Cells("NombreUsuario").Value.ToString()
                     Dim contrasena As String = dgvUsuarios.Rows(e.RowIndex).Cells("Contrasena").Value.ToString()
                     Dim idRol As Integer = CInt(dgvUsuarios.Rows(e.RowIndex).Cells("IdRol").Value)
-                    Dim f As New frmEditarUsuario(id, nombre, contrasena, idRol)
-                    f.ShowDialog()
-                    CargarUsuarios()
+
+                    ' 🔹 Abre el form de edición dentro del mismo shell
+                    FrmShell.ShowInShell(New frmEditarUsuario(id, nombre, contrasena, idRol))
+
             End Select
         End If
     End Sub
@@ -91,10 +92,8 @@ Public Class frmListaUsuarios
     End Sub
 
     Private Sub btnCrearUsuario_Click(sender As Object, e As EventArgs) Handles btnCrearUsuario.Click
-
         FrmShell.ShowInShell(New frmNuevoUsuario())
     End Sub
-
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()

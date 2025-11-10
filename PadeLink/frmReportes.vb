@@ -21,16 +21,27 @@ Public Class FrmReportes
         Me.Dock = DockStyle.Fill
         Me.Padding = New Padding(10, 5, 10, 5)
 
-        ' ===== TÍTULO =====
+        ' ===== TÍTULO CON FONDO =====
         Dim lblTitulo As New Label With {
         .Text = Me.Text,
         .Font = New Font("Bahnschrift SemiBold", 16, FontStyle.Regular),
-        .ForeColor = Color.FromArgb(40, 40, 40),
+        .ForeColor = Color.White,
+        .BackColor = Color.FromArgb(52, 73, 94),
         .AutoSize = False,
-        .TextAlign = ContentAlignment.MiddleLeft,
+        .TextAlign = ContentAlignment.BottomCenter,
         .Dock = DockStyle.Top,
-        .Height = 50,
+        .Height = 100,
         .Padding = New Padding(20, 0, 0, 0)
+    }
+
+        lblTitulo.Margin = New Padding(0, 50, 0, 0)
+
+
+        ' ===== PANEL CONTENEDOR PARA GRID =====
+        Dim pnlContenedorGrid As New Panel With {
+        .Dock = DockStyle.Fill,
+        .Padding = New Padding(10, 35, 10, 10), ' <-- el "25" baja el grid visualmente
+        .BackColor = Color.Transparent
     }
 
         ' ===== DATAGRID =====
@@ -43,6 +54,16 @@ Public Class FrmReportes
         .BackgroundColor = Color.FromArgb(248, 249, 250),
         .BorderStyle = BorderStyle.None
     }
+
+        ' Estilo visual de encabezados
+        With dgv.ColumnHeadersDefaultCellStyle
+            .BackColor = Color.FromArgb(230, 235, 240)
+            .ForeColor = Color.Black
+            .Font = New Font("Bahnschrift SemiBold", 10, FontStyle.Regular)
+        End With
+        dgv.EnableHeadersVisualStyles = False
+
+        pnlContenedorGrid.Controls.Add(dgv)
 
         ' ===== LABEL TOTAL =====
         lblTotal = New Label With {
@@ -78,16 +99,13 @@ Public Class FrmReportes
                 Me.Close()
         End Select
 
-        ' ===== ORDEN FINAL DE CONTROLES (FIX VISUAL) =====
+        ' ===== ORDEN FINAL DE CONTROLES =====
         Me.Controls.Clear()
+        Me.Controls.Add(pnlContenedorGrid)
+        Me.Controls.Add(lblTotal)
+        If pnlFiltros IsNot Nothing Then Me.Controls.Add(pnlFiltros)
+        Me.Controls.Add(lblTitulo)
 
-        ' Agregar en orden vertical correcto
-        Me.Controls.Add(dgv)          ' fill ocupa el espacio disponible
-        Me.Controls.Add(lblTotal)     ' abajo
-        If pnlFiltros IsNot Nothing Then Me.Controls.Add(pnlFiltros) ' arriba (si existe)
-        Me.Controls.Add(lblTitulo)    ' arriba del todo
-
-        ' Forzar nuevo layout
         Me.ResumeLayout()
         Me.PerformLayout()
     End Sub
@@ -121,10 +139,11 @@ Public Class FrmReportes
 
         pnlFiltros.Controls.AddRange({lblD, dtDesde, lblH, dtHasta, btnFiltrar})
         Me.Controls.Add(pnlFiltros)
-        Me.Controls.SetChildIndex(pnlFiltros, 1) ' lo ubica debajo del título
+        Me.Controls.SetChildIndex(pnlFiltros, 1)
 
         Me.Text = "📊 Recaudación (Administrador)"
     End Sub
+
 
     Private Sub CargarAdmin()
         Dim dt = RepositorioReportes.Admin_Recaudacion(dtDesde.Value, dtHasta.Value)

@@ -3,16 +3,10 @@ Imports System.Data.SqlClient
 
 Public Module RepositorioReportes
 
-    ' ===================== AJUSTES RÁPIDOS (si tu esquema difiere) =====================
-    ' ===================== AJUSTES RÁPIDOS =====================
     Private ReadOnly PRICE_CANDIDATES As String() =
     {"monto", "monto_inscripcion", "precio_inscripcion", "precio", "monto_torneo"}
     Private Const ESTADO_PARTIDO_FINALIZADO As String = "Finalizado"
-    ' ===========================================================
 
-    ' ===================================================================================
-
-    ' Devuelve el nombre de columna de precio que existe en Torneos (monto o precio_inscripcion)
     Private Function PrecioColumna(cn As SqlConnection) As String
         Using cmd As New SqlCommand("
             SELECT CASE 
@@ -38,7 +32,6 @@ Public Module RepositorioReportes
         For Each c In PRICE_CANDIDATES
             If TorneosColumnExists(cn, c) Then Return c
         Next
-        ' último recurso: devolvemos “monto” y que sea 0 si no existe
         Return "monto"
     End Function
 
@@ -47,7 +40,7 @@ Public Module RepositorioReportes
         Dim dt As New DataTable()
         Using cn = Conexion.GetConnection()
             cn.Open()
-            Dim priceCol As String = DetectPrecioColumn(cn)   ' <- ahora detecta bien
+            Dim priceCol As String = DetectPrecioColumn(cn)
 
             Dim sql As String =
 $"
@@ -99,7 +92,7 @@ ORDER BY Fecha DESC, Torneo ASC;
 
 
 
-    ' -------------------------- CANCHERO: “Calendario” (próximos y últimos) --------------------------
+    ' -------------------------- CANCHERO --------------------------
     Public Function Canchero_Calendario(Optional diasAtras As Integer = 7, Optional diasAdelante As Integer = 60) As DataTable
         Dim dt As New DataTable()
         Using cn = Conexion.GetConnection(), cmd As New SqlCommand("
@@ -125,7 +118,7 @@ ORDER BY Fecha DESC, Torneo ASC;
     End Function
 
     ' -------------------------- FISCAL: Avance de torneos activos --------------------------
-    ' % = partidos_finalizados / partidos_esperados; partidos_esperados ≈ N*(N-1)/2 con N = parejas inscriptas
+    ' -------------------------- FISCAL: Avance de torneos activos --------------------------
     Public Function Fiscal_Avance() As DataTable
         Dim dt As New DataTable()
         Using cn = Conexion.GetConnection(), cmd As New SqlCommand("
@@ -133,29 +126,16 @@ ORDER BY Fecha DESC, Torneo ASC;
     SELECT i.id_torneo, COUNT(DISTINCT i.id_pareja) AS parejas
     FROM dbo.Inscripcion i
     GROUP BY i.id_torneo
-),
-part AS (
-    SELECT p.id_torneo,
-           COUNT(DISTINCT CASE WHEN p.estado = @fin THEN p.id_partido END) AS jugados
-    FROM dbo.Partidos p
-    GROUP BY p.id_torneo
 )
 SELECT 
     t.nombre_torneo AS Torneo,
     CONVERT(date, t.fecha) AS Fecha,
     ISNULL(insc.parejas, 0) AS Parejas,
-    (ISNULL(insc.parejas,0)*(ISNULL(insc.parejas,0)-1))/2 AS PartidosEsperados,
-    ISNULL(part.jugados, 0)  AS PartidosJugados,
-    CAST(CASE 
-            WHEN (ISNULL(insc.parejas,0)*(ISNULL(insc.parejas,0)-1))/2 = 0 THEN 0
-            ELSE (ISNULL(part.jugados,0) * 100.0) / ((ISNULL(insc.parejas,0)*(ISNULL(insc.parejas,0)-1))/2)
-         END AS DECIMAL(5,2)) AS Porcentaje
+    (ISNULL(insc.parejas,0)*(ISNULL(insc.parejas,0)-1))/2 AS PartidosEsperados
 FROM dbo.Torneos t
-LEFT JOIN insc  ON insc.id_torneo = t.id_torneo
-LEFT JOIN part  ON part.id_torneo = t.id_torneo
+LEFT JOIN insc ON insc.id_torneo = t.id_torneo
 WHERE t.estado IN ('En Curso','EN CURSO','Activo','ACTIVO')
 ORDER BY Fecha DESC, Torneo;", cn)
-            cmd.Parameters.Add("@fin", SqlDbType.VarChar, 30).Value = ESTADO_PARTIDO_FINALIZADO
             cn.Open()
             Using da As New SqlDataAdapter(cmd)
                 da.Fill(dt)
@@ -163,5 +143,6 @@ ORDER BY Fecha DESC, Torneo;", cn)
         End Using
         Return dt
     End Function
+
 
 End Module

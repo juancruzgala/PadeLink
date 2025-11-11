@@ -198,11 +198,11 @@ ORDER BY fecha DESC, nombre_torneo;", cn)
                 If vTabla.Length > 0 Then
                     For Each r In vTabla
                         pdfTable.AddCell(New Phrase(r("Pareja").ToString(), fN))
-                        pdfTable.AddCell(New Phrase(r("partidos_jugados").ToString(), fN))
-                        pdfTable.AddCell(New Phrase(r("ganados").ToString(), fN))
-                        pdfTable.AddCell(New Phrase(r("perdidos").ToString(), fN))
-                        pdfTable.AddCell(New Phrase(r("games_favor").ToString(), fN))
-                        pdfTable.AddCell(New Phrase(r("games_contra").ToString(), fN))
+                        pdfTable.AddCell(New Phrase("-", fN))
+                        pdfTable.AddCell(New Phrase("-", fN))
+                        pdfTable.AddCell(New Phrase("-", fN))
+                        pdfTable.AddCell(New Phrase("-", fN))
+                        pdfTable.AddCell(New Phrase("-", fN))
                     Next
                 End If
 
@@ -257,7 +257,7 @@ ORDER BY fecha DESC, nombre_torneo;", cn)
         End Using
     End Sub
 
-    Private Sub btnRegistrarResultado_Click(sender As Object, e As EventArgs) Handles btnRegistrarResultado.Click
+    Private Sub btnRegistrarResultado_Click(sender As Object, e As EventArgs)
         If dgvPartidos.CurrentRow Is Nothing Then
             MessageBox.Show("Seleccioná un partido.", "Info")
             Return

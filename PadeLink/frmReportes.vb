@@ -197,29 +197,37 @@ Public Class FrmReportes
         Dim dt = RepositorioReportes.Fiscal_Avance()
         dgv.DataSource = dt
 
-        FormatearColumnaSiExiste("Fecha", "d")
-        FormatearColumnaSiExiste("Porcentaje", "N2")
+        ' === Esperar a que las columnas estén creadas antes de modificarlas ===
+        dgv.AutoGenerateColumns = True
+        dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        dgv.Refresh()
 
-        ' === Ocultar columnas que no querés mostrar ===
+        ' === Formatear columnas ===
+        FormatearColumnaSiExiste("Fecha", "d")
+
+        ' === Eliminar columnas que no queremos mostrar ===
         If dgv.Columns.Contains("PartidosJugados") Then
-            dgv.Columns("PartidosJugados").Visible = False
+            dgv.Columns.Remove("PartidosJugados")
         End If
         If dgv.Columns.Contains("Porcentaje") Then
-            dgv.Columns("Porcentaje").Visible = False
+            dgv.Columns.Remove("Porcentaje")
         End If
 
-        ' Colorear filas según avance
-        If dt.Columns.Contains("Porcentaje") Then
-            For Each gr As DataGridViewRow In dgv.Rows
-                Dim p As Decimal = 0
-                Decimal.TryParse(Convert.ToString(gr.Cells("Porcentaje").Value), p)
-                If p < 100D Then
-                    gr.DefaultCellStyle.BackColor = Color.MintCream
-                Else
-                    gr.DefaultCellStyle.BackColor = Color.Honeydew
-                End If
-            Next
-        End If
+        ' === Reacomodar el ancho de las columnas restantes ===
+        For Each col As DataGridViewColumn In dgv.Columns
+            col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Next
+
+        ' Distribuir pesos manualmente para que se vea equilibrado
+        If dgv.Columns.Contains("Torneo") Then dgv.Columns("Torneo").FillWeight = 40
+        If dgv.Columns.Contains("Fecha") Then dgv.Columns("Fecha").FillWeight = 25
+        If dgv.Columns.Contains("Parejas") Then dgv.Columns("Parejas").FillWeight = 20
+        If dgv.Columns.Contains("PartidosEsperados") Then dgv.Columns("PartidosEsperados").FillWeight = 15
+
+        ' === Decoración de filas ===
+        For Each gr As DataGridViewRow In dgv.Rows
+            gr.DefaultCellStyle.BackColor = Color.MintCream
+        Next
 
         lblTotal.Text = $"Torneos activos: {dt.Rows.Count}"
     End Sub

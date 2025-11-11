@@ -67,7 +67,7 @@ Public Class lista_inscriptos
             .HeaderText = "Estado de Pago",
             .DataPropertyName = "SeniaOPago",
             .FillWeight = 25,
-            .MinimumWidth = 120
+            .MinimumWidth = 90
         }
 
         Dim cBtnEditar As New DataGridViewButtonColumn() With {
